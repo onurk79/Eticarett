@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Eticarett.Areas.Admin.Models;
 namespace Eticarett.Areas.Admin.Controllers
 {
     public class KampanyaController : Controller
@@ -19,23 +19,25 @@ namespace Eticarett.Areas.Admin.Controllers
         }
         public ActionResult New()
         {
-
-          var marka = context.Markalar.Select(x => new SelectListItem
+            IList<list> ls;
+            ls.Add();
+          var marka = context.Markalar.Select(x => new SelectListGroup
             {
               
-                Value = x.MarkaAdi,
-                Text=x.MarkaAdi
+          
                
             }
 
                 );
-            ViewBag.UrunId = marka;
+            //ViewBag.UrunId = marka;
             ViewData["UrunId"] = marka;
             return View();
+            
         }
         [HttpPost]
         public ActionResult New(Kampanya Kampanya)
         {
+
             return View();
         }
     }
