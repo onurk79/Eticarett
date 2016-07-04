@@ -1,0 +1,80 @@
+﻿@model Eticarett.Areas.Admin.Models.list.dbname
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+
+
+    <title>List</title>
+</head>
+<body>
+    @using (Html.BeginForm("List", "Homes", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+
+        <ul class="list-group">
+            <li class="list-group">
+            <a href="@Url.Action("List", "Kampanya")" class="list-group-item list-group-item-success">Kampanya</a>
+            </li>
+            <li class="list-group">
+            <a href="@Url.Action("List", "Homes",new {ids="Üye" })" class="list-group-item list-group-item-success">Üye</a>
+            </li>
+            <li class="list-group">
+            <a href="@Url.Action("List", "Homes",new {ids="Banka" })" class="list-group-item list-group-item-success">Banka</a>
+            </li>
+            <li class="list-group">
+            <a href="@Url.Action("List", "Homes",new {ids="Kargo" })" class="list-group-item list-group-item-success">Kargo</a>
+            </li>
+            <li class="list-group">
+            <a href="@Url.Action("List", "Homes",new {ids="Katagori" })" class="list-group-item list-group-item-success">Katagori</a>
+            </li>
+            <li class="list-group">
+            <a href="@Url.Action("List", "Homes",new {ids="Markalar" })" class="list-group-item list-group-item-success">Markalar</a>
+            </li>
+            <li class="list-group">
+             <a href="@Url.Action("List", "Homes",new {ids="Odeme Secenekleri" })" class="list-group-item list-group-item-success">Odeme Secenekleri</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "Homes",new {ids="Ozellik Detay" })" class="list-group-item list-group-item-success">Ozellik Detay</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "Homes",new {ids="Resimler" })" class="list-group-item list-group-item-success">Resimler</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "Homes",new {ids="Roller" })" class="list-group-item list-group-item-success">Roller</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "Homes",new {ids="Sepet" })" class="list-group-item list-group-item-success">Sepet</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "Homes",new {ids="SiparisDurumu" })" class="list-group-item list-group-item-success">Siparis Durumu</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "Homes",new {ids= "Siparisler" })" class="list-group-item list-group-item-success">Siparisler</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "Homes",new {ids="Taksitler" })" class="list-group-item list-group-item-success">Taksitler</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "Homes",new {ids="TaksitTaplosu" })" class="list-group-item list-group-item-success">Taksit Taplosu</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "Homes",new {ids="UrunFiyat" })" class="list-group-item list-group-item-success">UrunFiyat</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "Homes",new {ids="Urunler" })" class="list-group-item list-group-item-success">Urunler</a>
+                </li>
+            <li class="list-group"> 
+                 <a href="@Url.Action("List", "Homes",new {ids="UrunOzellikler" })" class="list-group-item list-group-item-success">UrunOzellikler</a>
+                </li>
+</ul>
+
+    }
+</body>
+</html>

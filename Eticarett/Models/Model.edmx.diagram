@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bbb0ff6b67af4845b052150116803b97" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Banka" Width="1.5" PointX="6" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Kampanya" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Kargo" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Katagori" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Markalar" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OdemeSecenekleri" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OzellikDetay" Width="1.5" PointX="8.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Resimler" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Roller" Width="1.5" PointX="8.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Sepet" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SiparisDurumu" Width="1.5" PointX="6" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Siparisler" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Taksitler" Width="1.5" PointX="8.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TaksitTaplosu" Width="1.5" PointX="6" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UrunFiyat" Width="1.5" PointX="5.25" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Urunler" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UrunOzellikler" Width="1.5" PointX="6" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Üye" Width="1.5" PointX="11" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Taksitler_Banka" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Kampanya_Urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Siparisler_Kargo" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Urunler_Kategori" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Urunler_Markalar" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Siparisler_OdemeSecenekleri" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_OzellikDetay_Urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_OzellikDetay_UrunOzellikler" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Resimler_Urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Üye_Roller" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Sepet_Urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Siparisler_SiparisDurumu" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Siparisler_Taksitler" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Siparisler_Urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Taksitler_TaksitTaplosu" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Taksitler_Urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_UrunFiyat_Urunler" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
