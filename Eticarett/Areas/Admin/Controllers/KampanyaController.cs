@@ -19,17 +19,22 @@ namespace Eticarett.Areas.Admin.Controllers
         }
         public ActionResult New()
         {
-            IList<list> ls;
-            ls.Add();
-          var marka = context.Markalar.Select(x => new SelectListGroup
+
+            var marka = context.Markalar.Select(x => new SelectListItem
             {
-              
-          
+
+                Text = x.MarkaAdi,
+                Value = x.Id.ToString()
                
             }
-
+           
                 );
-            //ViewBag.UrunId = marka;
+            var kategori = context.Katagori.Select(x => new SelectListItem
+            {
+                Text = x.KategoriAdi,
+                Value = x.Id.ToString()
+            });
+            ViewData["Id"] = kategori;
             ViewData["UrunId"] = marka;
             return View();
             
@@ -37,6 +42,8 @@ namespace Eticarett.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult New(Kampanya Kampanya)
         {
+            Kampanya Kampanyadb = new Kampanya();
+            context.Kampanya.Add(Kampanyadb);
 
             return View();
         }
