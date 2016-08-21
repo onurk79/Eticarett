@@ -43,7 +43,20 @@ namespace Eticarett.Areas.Admin.Controllers
         public ActionResult New(Kampanya Kampanya)
         {
             Kampanya Kampanyadb = new Kampanya();
-            context.Kampanya.Add(Kampanyadb);
+            Urunler Urundb=new Urunler();
+
+            Urundb = context.Urunler.Where(x => x.Katagori.Id == Kampanya.Id && x.Markalar.Id == Kampanya.UrunId).SingleOrDefault();
+          
+                Kampanyadb.Urunler = Urundb;
+                Kampanyadb.UrunId = Urundb.Id;               
+                Kampanyadb.IndrimOranı = Kampanya.IndrimOranı;
+                Kampanyadb.Acıklama = Kampanya.Acıklama;
+                Kampanyadb.BaslangıcTarihi = Kampanya.BaslangıcTarihi;
+                Kampanyadb.BitisTarihi = Kampanya.BitisTarihi;
+                context.Kampanya.Add(Kampanyadb);
+            context.SaveChanges();
+      
+         
 
             return View();
         }

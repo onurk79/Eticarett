@@ -40,6 +40,7 @@ namespace Eticarett.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Taksitler> Taksitler { get; set; }
         public virtual DbSet<TaksitTaplosu> TaksitTaplosu { get; set; }
+        public virtual DbSet<UrunDetaylari> UrunDetaylari { get; set; }
         public virtual DbSet<UrunFiyat> UrunFiyat { get; set; }
         public virtual DbSet<Urunler> Urunler { get; set; }
         public virtual DbSet<UrunOzellikler> UrunOzellikler { get; set; }

@@ -29,9 +29,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Acıklama)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Urunler.Acıklama)
-            </th>
+           
             <th></th>
         </tr>
     
@@ -50,9 +48,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Acıklama)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Urunler.Acıklama)
-            </td>
+            
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |

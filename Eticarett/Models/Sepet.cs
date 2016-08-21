@@ -18,6 +18,6 @@ namespace Eticarett.Models
         public int UrunId { get; set; }
         public System.DateTime RezervasyonSüresi { get; set; }
     
-        public virtual Urunler Urunler { get; set; }
+        public virtual UrunDetaylari UrunDetaylari { get; set; }
     }
 }

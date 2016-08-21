@@ -14,12 +14,20 @@ namespace Eticarett.Models
     
     public partial class UrunFiyat
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UrunFiyat()
+        {
+            this.Kampanya = new HashSet<Kampanya>();
+        }
+    
         public int Id { get; set; }
         public decimal AlisFiyati { get; set; }
         public float KarOranı { get; set; }
         public float KdvOrani { get; set; }
         public int UrunId { get; set; }
     
-        public virtual Urunler Urunler { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kampanya> Kampanya { get; set; }
+        public virtual UrunDetaylari UrunDetaylari { get; set; }
     }
 }

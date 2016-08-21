@@ -19,7 +19,7 @@ namespace Eticarett.Models
         public int UrunOzellikId { get; set; }
         public string ÖzellikDetay { get; set; }
     
-        public virtual Urunler Urunler { get; set; }
+        public virtual UrunDetaylari UrunDetaylari { get; set; }
         public virtual UrunOzellikler UrunOzellikler { get; set; }
     }
 }

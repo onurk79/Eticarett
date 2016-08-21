@@ -1,42 +1,152 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Admin/Content/css")
-    @Scripts.Render("~/Admin/bundles/modernizr")
-</head>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title> E-Ticaret</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <link href="~/Content/Styles/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/Styles/font-awesome.min.css rel="stylesheet">
+    <link href="~/Content/Styles/prettyPhoto.css" rel="stylesheet">
+    <link href="~/Content/Styles/price-range.css" rel="stylesheet">
+    <link href="~/Content/Styles/animate.css" rel="stylesheet">
+    <link href="~/Content/Styles/main.css" rel="stylesheet">
+    <link href="~/Content/Styles/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <header id="header">
+        <!--header-->
+        <div class="header_top">
+            <!--header_top-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="contactinfo">
+                            <ul class="nav nav-pills">
+                                <li><a href="#"><i class="fa fa-phone"></i> +90 000 00 00</a></li>
+                                <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="social-icons pull-right">
+                            <ul class="nav navbar-nav">
+                                <li><a href="https://facebook.com/onur.kulakoglu.5" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/onurkulakolu" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="https://plus.google.com/106247056817552840468/posts?pli=1" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+        </div><!--/header_top-->
+
+        <div class="header-middle">
+            <!--header-middle-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <a href="index.html"><img src="~/images/home/Logo.png" alt="" /></a>
+                        </div>
+
+
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="shop-menu pull-right">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Hesabım</a></li>
+
+                                <li><a href="checkout.html"><i class="glyphicon glyphicon-screenshot"></i> Çıkış</a></li>
+                                <li><a href="cart.html"><i class="glyphicon glyphicon-shopping-cart"></i> Sepet</a></li>
+                                <li><a href="@Url.Action("Index", "Login", new {})"> <i class="glyphicon glyphicon-lock"></i>Giriş </a></li>
+                                <li><a href="@Url.Action("ekle", "UrunEkle", new {area="admin"})"> <i class="fa fa-lock"></i> Admin</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/Admin/bundles/jquery")
-    @Scripts.Render("~/Admin/bundles/bootstrap")
+
+        <div class="header-bottom">
+            <!--header-bottom-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="mainmenu pull-left">
+                            <ul class="nav navbar-nav collapse navbar-collapse">
+                                <li><a href="index.html" class="active">Home</a></li>
+                                <li class="dropdown">
+                                    <a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="shop.html">Products</a></li>
+                                        <li><a href="product-details.html">Product Details</a></li>
+                                        <li><a href="checkout.html">Checkout</a></li>
+                                        <li><a href="cart.html">Cart</a></li>
+                                        <li><a href="login.html">Login</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="blog.html">Blog List</a></li>
+                                        <li><a href="blog-single.html">Blog Single</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="404.html">404</a></li>
+                                <li><a href="contact-us.html">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="search_box pull-right">
+                            <span class="glyphicon glyphicon-search"></span> <input type="text" placeholder="Search" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/header-bottom-->
+    </header>
+    @RenderBody()
+ 
+
+
+
+    <script src="~/Content/Scripts/jquery.js"></script>
+    <script src="~/Content/Scripts/bootstrap.min.js"></script>
+    <script src="~/Content/Scripts/jquery.scrollUp.min.js"></script>
+    <script src="~/Content/Scripts/price-range.js"></script>
+    <script src="~/Content/Scripts/jquery.prettyPhoto.js"></script>
+    <script src="~/Content/Scripts/main.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>

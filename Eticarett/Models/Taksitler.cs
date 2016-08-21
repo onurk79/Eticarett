@@ -29,6 +29,6 @@ namespace Eticarett.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Siparisler> Siparisler { get; set; }
         public virtual TaksitTaplosu TaksitTaplosu { get; set; }
-        public virtual Urunler Urunler { get; set; }
+        public virtual UrunDetaylari UrunDetaylari { get; set; }
     }
 }

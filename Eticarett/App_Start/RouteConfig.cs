@@ -19,7 +19,7 @@ namespace Eticarett
             routes.MapRoute("Indev", "Index", new { controller = "Login", action = "Index" }/*, namespaces*/);
             routes.MapRoute("Login", "Login", new { controller = "Login", action = "Login" }/*, namespaces*/);
             routes.MapRoute("Save", "Save", new { controller = "Login", action = "Save" }/*, namespaces*/);
-            routes.MapRoute("ekle", "ekle", new { controller = "UrunEkle", action = "ekle" }/*,namespaces*/);
+            routes.MapRoute("Ekle", "ekle", new { controller = "Urun", action = "New" });
             routes.MapRoute("List", "", new { controller = "Homes", action = "List" }/*, namespaces*/);
             routes.MapRoute("KampanyaList", "", new { controller = "Kampanya", action = "List" }/*, namespaces*/);
             routes.MapRoute("KampanyaNew", "", new { controller = "Kampanya", action = "New" }/*, namespaces*/);

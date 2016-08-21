@@ -17,13 +17,8 @@ namespace Eticarett.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Urunler()
         {
-            this.Kampanya = new HashSet<Kampanya>();
-            this.OzellikDetay = new HashSet<OzellikDetay>();
             this.Resimler = new HashSet<Resimler>();
-            this.Sepet = new HashSet<Sepet>();
-            this.Siparisler = new HashSet<Siparisler>();
-            this.Taksitler = new HashSet<Taksitler>();
-            this.UrunFiyat = new HashSet<UrunFiyat>();
+            this.UrunDetaylari = new HashSet<UrunDetaylari>();
         }
     
         public int Id { get; set; }
@@ -31,21 +26,11 @@ namespace Eticarett.Models
         public int MarkaId { get; set; }
         public string Acıklama { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Kampanya> Kampanya { get; set; }
         public virtual Katagori Katagori { get; set; }
         public virtual Markalar Markalar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OzellikDetay> OzellikDetay { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Resimler> Resimler { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sepet> Sepet { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Siparisler> Siparisler { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Taksitler> Taksitler { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UrunFiyat> UrunFiyat { get; set; }
+        public virtual ICollection<UrunDetaylari> UrunDetaylari { get; set; }
     }
 }

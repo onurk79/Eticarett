@@ -5,21 +5,46 @@ using System.Linq;
 using System.Web;
 using System.Collections.Generic;
 using System.Globalization;
+using static Eticarett.ViewModels.Lists;
+using System.IO;
+using System.Drawing;
+using Eticarett.ViewModels;
+using System.Web.Helpers;
 
 namespace Eticarett.Controllers
 {
     public class HomeController : Controller
     {
         private Entitie context = new Entitie();
-        public ActionResult Index(Resimler photo, HttpPostedFileBase image)
+        public ActionResult Index()
         {
-            //photo.ResimYolu = image.ContentType;
-            //photo.ResimYolu = "C:/Users/onur/Desktop/Adidas.jpg";
-            //photo.KatalogResmi = new byte[image.ContentLength];
-            //image.InputStream.Read(photo.KatalogResmi, 0, image.ContentLength);
-            //context.Resimler.Add(photo);
-            //context.SaveChanges();
-            return View();
+            MarkaKategori MarkaKategori = new MarkaKategori();
+           IList< Urunler> Urunler = context.Urunler.OrderByDescending(p => p.Id).Take(10).ToList();
+         
+            
+          
+            List<Marka> _markalist = new List<Marka>();
+            MarkaKategori.Kategori = context.Katagori.ToList();
+            IList<Markalar> Markalar = context.Markalar.ToList();
+            foreach (var marka in Markalar)
+            {
+                ViewModels.Marka _marka = new ViewModels.Marka();
+                MemoryStream ms = new MemoryStream(marka.MarkaLogo, 0, marka.MarkaLogo.Length);
+                ms.Write(marka.MarkaLogo, 0, marka.MarkaLogo.Length);
+                WebImage image = new WebImage(ms);
+                image.Resize(30, 50, true);
+                _marka.Id = marka.Id;
+                _marka.Image = image;
+                _marka.MarkaAcıklmasi = marka.MarkaAcıklmasi;
+                _marka.MarkaAdi = marka.MarkaAdi;
+                _markalist.Add(_marka);
+                var upload = Path.Combine(Server.MapPath("~/images/Database/" + _marka.Id));
+                _marka.imagePath = "/images/Database/" + _marka.Id + "." + image.ImageFormat;
+                image.Save(upload);
+            }
+            MarkaKategori.Marka = _markalist;
+
+            return View(MarkaKategori);
         }
 
         public ActionResult About()

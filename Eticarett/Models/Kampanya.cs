@@ -21,6 +21,6 @@ namespace Eticarett.Models
         public System.DateTime BitisTarihi { get; set; }
         public string Acıklama { get; set; }
     
-        public virtual Urunler Urunler { get; set; }
+        public virtual UrunFiyat UrunFiyat { get; set; }
     }
 }

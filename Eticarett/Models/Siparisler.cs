@@ -29,6 +29,6 @@ namespace Eticarett.Models
         public virtual OdemeSecenekleri OdemeSecenekleri { get; set; }
         public virtual SiparisDurumu SiparisDurumu { get; set; }
         public virtual Taksitler Taksitler { get; set; }
-        public virtual Urunler Urunler { get; set; }
+        public virtual UrunDetaylari UrunDetaylari { get; set; }
     }
 }
