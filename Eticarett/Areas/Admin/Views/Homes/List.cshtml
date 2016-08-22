@@ -13,66 +13,70 @@
     <title>List</title>
 </head>
 <body>
-    @using (Html.BeginForm("List", "Homes", FormMethod.Post))
+    @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
 
         <ul class="list-group">
             <li class="list-group">
+                <a href="@Url.Action("List", "UrunFiyat")" class="list-group-item list-group-item-success">UrunFiyat</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "Urun")" class="list-group-item list-group-item-success">Urunler</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "UrunDetay")" class="list-group-item list-group-item-success">UrunDetay</a>
+            </li>
+            <li class="list-group">
+                <a href="@Url.Action("List", "UrunOzellikler")" class="list-group-item list-group-item-success">UrunOzellikler</a>
+            </li>
+            <li class="list-group">
                 <a href="@Url.Action("List", "Kampanya")" class="list-group-item list-group-item-success">Kampanya</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="Üye" })" class="list-group-item list-group-item-success">Üye</a>
+                <a href="@Url.Action("List", "Üye")" class="list-group-item list-group-item-success">Üye</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="Banka" })" class="list-group-item list-group-item-success">Banka</a>
+                <a href="@Url.Action("List", "Banka")" class="list-group-item list-group-item-success">Banka</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="Kargo" })" class="list-group-item list-group-item-success">Kargo</a>
+                <a href="@Url.Action("List", "Kargo")" class="list-group-item list-group-item-success">Kargo</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="Katagori" })" class="list-group-item list-group-item-success">Katagori</a>
+                <a href="@Url.Action("List", "Katagori")" class="list-group-item list-group-item-success">Katagori</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="Markalar" })" class="list-group-item list-group-item-success">Markalar</a>
+                <a href="@Url.Action("List", "Markalar")" class="list-group-item list-group-item-success">Markalar</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="Odeme Secenekleri" })" class="list-group-item list-group-item-success">Odeme Secenekleri</a>
+                <a href="@Url.Action("List", "OdemeSecenekleri")" class="list-group-item list-group-item-success">Odeme Secenekleri</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="Ozellik Detay" })" class="list-group-item list-group-item-success">Ozellik Detay</a>
+                <a href="@Url.Action("List", "OzellikDetay")" class="list-group-item list-group-item-success">Ozellik Detay</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="Resimler" })" class="list-group-item list-group-item-success">Resimler</a>
+                <a href="@Url.Action("List", "Resimler")" class="list-group-item list-group-item-success">Resimler</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="Roller" })" class="list-group-item list-group-item-success">Roller</a>
+                <a href="@Url.Action("List", "Roller")" class="list-group-item list-group-item-success">Roller</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="Sepet" })" class="list-group-item list-group-item-success">Sepet</a>
+                <a href="@Url.Action("List", "Sepet")" class="list-group-item list-group-item-success">Sepet</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="SiparisDurumu" })" class="list-group-item list-group-item-success">Siparis Durumu</a>
+                <a href="@Url.Action("List", "SiparisDurumu")" class="list-group-item list-group-item-success">Siparis Durumu</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids= "Siparisler" })" class="list-group-item list-group-item-success">Siparisler</a>
+                <a href="@Url.Action("List", "Siparisler",new {ids= "Siparisler" })" class="list-group-item list-group-item-success">Siparisler</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="Taksitler" })" class="list-group-item list-group-item-success">Taksitler</a>
+                <a href="@Url.Action("List", "Taksitler")" class="list-group-item list-group-item-success">Taksitler</a>
             </li>
             <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="TaksitTaplosu" })" class="list-group-item list-group-item-success">Taksit Taplosu</a>
+                <a href="@Url.Action("List", "TaksitTaplosu")" class="list-group-item list-group-item-success">Taksit Taplosu</a>
             </li>
-            <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="UrunFiyat" })" class="list-group-item list-group-item-success">UrunFiyat</a>
-            </li>
-            <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="Urunler" })" class="list-group-item list-group-item-success">Urunler</a>
-            </li>
-            <li class="list-group">
-                <a href="@Url.Action("List", "Homes",new {ids="UrunOzellikler" })" class="list-group-item list-group-item-success">UrunOzellikler</a>
-            </li>
+
         </ul>
 
     }

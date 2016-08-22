@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Eticarett.Infrastructure;
-using Eticarett.Areas.Admin.Models;
+
 namespace Eticarett.Areas.Admin.Controllers
 {
     [SelectedTab("Homes")]

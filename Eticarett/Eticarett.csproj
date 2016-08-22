@@ -134,8 +134,9 @@
     <Compile Include="Areas\Admin\Controllers\HomesController.cs" />
     <Compile Include="Areas\Admin\Controllers\KampanyaController.cs" />
     <Compile Include="Areas\Admin\Controllers\UrunController.cs" />
-    <Compile Include="Areas\Admin\Models\list.cs" />
-    <Compile Include="Areas\Admin\Models\picture.cs" />
+    <Compile Include="Areas\Admin\Controllers\UrunDetayController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UrunFiyatController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Kampanya.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -222,6 +223,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Lists.cs" />
     <Compile Include="ViewModels\Marka.cs" />
+    <Compile Include="ViewModels\Urun.cs" />
     <Compile Include="ViewModels\Uye.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -313,7 +315,7 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Homes\List.cshtml" />
     <Content Include="Areas\Admin\Views\Kampanya\List.cshtml" />
-    <Content Include="Areas\Admin\Views\Urun\New.cshtml" />
+    <Content Include="Areas\Admin\Views\Urun\-New.cshtml" />
     <Content Include="Areas\Admin\Views\Kampanya\New.cshtml" />
     <Content Include="images\cart\Thumbs.db" />
     <Content Include="images\home\Thumbs.db" />
@@ -349,6 +351,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="images\Database\" />
   </ItemGroup>
   <ItemGroup>
@@ -364,7 +367,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Areas\Admin\Views\Urun\List.cshtml" />
     <EntityDeploy Include="Models\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
@@ -372,6 +374,13 @@
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Urun\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Urun\New.cshtml" />
+    <Content Include="Areas\Admin\Views\UrunDetay\List.cshtml" />
+    <Content Include="Areas\Admin\Views\UrunDetay\New.cshtml" />
+    <Content Include="Areas\Admin\Views\UrunFiyat\List.cshtml" />
+    <Content Include="Areas\Admin\Views\UrunFiyat\New.cshtml" />
+    <Content Include="Areas\Admin\Views\Urun\Edit.cshtml" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,5 @@
-﻿@model IEnumerable<Eticarett.Models.Kampanya>
+﻿@model IEnumerable<Eticarett.Models.Urunler>
 
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 
@@ -13,41 +10,35 @@
 </head>
 <body>
     <p>
-        @Html.ActionLink("New", "Urun")
+        @Html.ActionLink("New", "New")
     </p>
     <table class="table">
         <tr>
+            
             <th>
-                @Html.DisplayNameFor(model => model.IndrimOranı)
+                @Html.DisplayNameFor(model => model.Katagori.KategoriAdi)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BaslangıcTarihi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BitisTarihi)
+                @Html.DisplayNameFor(model => model.Markalar.MarkaAdi)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Acıklama)
             </th>
-           
             <th></th>
         </tr>
     
     @foreach (var item in Model) {
         <tr>
+           
             <td>
-                @Html.DisplayFor(modelItem => item.IndrimOranı)
+                @Html.DisplayFor(modelItem => item.Katagori.KategoriAdi)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BaslangıcTarihi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BitisTarihi)
+                @Html.DisplayFor(modelItem => item.Markalar.MarkaAdi)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Acıklama)
             </td>
-            
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id=item.Id }) |
@@ -57,5 +48,6 @@
     }
     
     </table>
+    @Html.ActionLink("Geri Dön", "List", "Homes")
 </body>
 </html>

@@ -4,27 +4,58 @@ using System;
 using System.Linq;
 using System.Web;
 using System.Collections.Generic;
-using System.Globalization;
-using static Eticarett.ViewModels.Lists;
 using System.IO;
-using System.Drawing;
 using Eticarett.ViewModels;
 using System.Web.Helpers;
+using Eticarett.Infrastructure;
+
 
 namespace Eticarett.Controllers
 {
     public class HomeController : Controller
     {
-        private Entitie context = new Entitie();
-        public ActionResult Index()
+       
+
+        public List<DigerUrunler> KampanyalıUrn(int page)
         {
-            MarkaKategori MarkaKategori = new MarkaKategori();
+            List<DigerUrunler> b = new List<DigerUrunler>();
+
+            var currentPosts = context.Kampanya.Where(p => p.BitisTarihi > DateTime.Now).OrderByDescending(p => p.BaslangıcTarihi)
+                .Skip((page - 1) * postsPerPage)
+                .Take(postsPerPage).ToList();
+            DigerUrunler urrun = new DigerUrunler();
+            foreach (var _urun in currentPosts)
+            {
+                urrun.Fiyat = (((_urun.UrunFiyat.AlisFiyati) *
+                       (Convert.ToDecimal(_urun.UrunFiyat.KarOranı * _urun.UrunFiyat.KdvOrani))) / 100)
+                       * Convert.ToDecimal(_urun.IndrimOranı);
+                MemoryStream ms = new MemoryStream(_urun.UrunFiyat.UrunDetaylari.resim, 0, _urun.UrunFiyat.UrunDetaylari.resim.Length);
+                ms.Write(_urun.UrunFiyat.UrunDetaylari.resim, 0, _urun.UrunFiyat.UrunDetaylari.resim.Length);
+                WebImage image = new WebImage(ms);
+                image.Resize(484, 441, false);
+                var upload = "~\\images\\Database\\" + _urun.UrunFiyat.UrunId + 484 + 441;
+                urrun.ResimYolu = "/images/Database/" + _urun.UrunFiyat.UrunId +484+441+ "." + image.ImageFormat;
+                image.Save(upload);
+                urrun.UrunId = _urun.UrunFiyat.UrunId;
+                urrun.UrunAdi = _urun.UrunFiyat.UrunDetaylari.model_cins;
+                b.Add(urrun);
+                
+                
+            }
+            return b;
+        }
+
+        private static int postsPerPage = 5;
+        private Entitie context = new Entitie();
+        public ActionResult Index( int page=1)
+        {
+            Lists MarkaKategori = new Lists();
            IList< Urunler> Urunler = context.Urunler.OrderByDescending(p => p.Id).Take(10).ToList();
          
             
           
             List<Marka> _markalist = new List<Marka>();
-            MarkaKategori.Kategori = context.Katagori.ToList();
+          
             IList<Markalar> Markalar = context.Markalar.ToList();
             foreach (var marka in Markalar)
             {
@@ -42,9 +73,18 @@ namespace Eticarett.Controllers
                 _marka.imagePath = "/images/Database/" + _marka.Id + "." + image.ImageFormat;
                 image.Save(upload);
             }
-            MarkaKategori.Marka = _markalist;
+        
+            var totalPostCount = context.Kampanya.Count();
 
-            return View(MarkaKategori);
+           var currentPosts= KampanyalıUrn(page);
+
+           
+            return View(new KampanyalıUrunler()
+            {
+                kampanyalıUrunler=new PageData<DigerUrunler>(currentPosts, totalPostCount, page, postsPerPage),
+                Marka=_markalist,
+                Kategori = context.Katagori.ToList()
+            });
         }
 
         public ActionResult About()

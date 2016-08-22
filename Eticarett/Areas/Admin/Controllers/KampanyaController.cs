@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Eticarett.Areas.Admin.Models;
+
 namespace Eticarett.Areas.Admin.Controllers
 {
     public class KampanyaController : Controller
@@ -16,6 +16,7 @@ namespace Eticarett.Areas.Admin.Controllers
         {
             IEnumerable<Kampanya> kampanya = context.Kampanya.ToList();
             return View(kampanya);
+
         }
         public ActionResult New()
         {
@@ -25,40 +26,47 @@ namespace Eticarett.Areas.Admin.Controllers
 
                 Text = x.MarkaAdi,
                 Value = x.Id.ToString()
-               
+
             }
-           
+
                 );
+            var urun = context.UrunDetaylari.Select(x => new SelectListItem
+            {
+                Text = x.model_cins,
+                Value = x.Id.ToString()
+            });
             var kategori = context.Katagori.Select(x => new SelectListItem
             {
                 Text = x.KategoriAdi,
                 Value = x.Id.ToString()
             });
-            ViewData["Id"] = kategori;
-            ViewData["UrunId"] = marka;
+            ViewData["KategoriId"] = kategori;
+            ViewData["MarkaId"] = marka;
+            ViewData["UrunId"] = urun;
             return View();
-            
+
         }
         [HttpPost]
-        public ActionResult New(Kampanya Kampanya)
+        public ActionResult New(ViewModels.Kampanya Kampanya)
         {
-            Kampanya Kampanyadb = new Kampanya();
-            Urunler Urundb=new Urunler();
 
-            Urundb = context.Urunler.Where(x => x.Katagori.Id == Kampanya.Id && x.Markalar.Id == Kampanya.UrunId).SingleOrDefault();
-          
-                Kampanyadb.Urunler = Urundb;
-                Kampanyadb.UrunId = Urundb.Id;               
-                Kampanyadb.IndrimOranı = Kampanya.IndrimOranı;
-                Kampanyadb.Acıklama = Kampanya.Acıklama;
-                Kampanyadb.BaslangıcTarihi = Kampanya.BaslangıcTarihi;
+            if (context.Kampanya.Where(y => y.UrunId == context.UrunFiyat.Where(x => x.UrunId == Kampanya.UrunId).FirstOrDefault().Id && y.BitisTarihi > System.DateTime.Now).Count() == 0)
+            {
+                Kampanya Kampanyadb = new Kampanya();
+                UrunDetaylari Urundb = new UrunDetaylari();
+                Urundb = context.UrunDetaylari.Where(x => x.Id == Kampanya.UrunId).FirstOrDefault();
+                Kampanyadb.UrunFiyat = Urundb.UrunFiyat.SingleOrDefault();
+                Kampanyadb.UrunId = Urundb.Id;
+                Kampanyadb.IndrimOranı = Kampanya.IndirimOranı;
+                Kampanyadb.Acıklama = Kampanya.Aciklama;
+                Kampanyadb.BaslangıcTarihi = Kampanya.BaslangicTarihi;
                 Kampanyadb.BitisTarihi = Kampanya.BitisTarihi;
                 context.Kampanya.Add(Kampanyadb);
-            context.SaveChanges();
-      
-         
+                context.SaveChanges();
+            }
 
-            return View();
+
+            return RedirectToAction("List");
         }
     }
 }
