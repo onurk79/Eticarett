@@ -47,5 +47,12 @@ namespace Eticarett.Areas.Admin.Controllers
             }
             return RedirectToAction("List");
         }
+        public ActionResult Delete(int id)
+        {
+            UrunDetaylari UrunDetay = context.UrunDetaylari.Find(id);
+            context.UrunDetaylari.Remove(UrunDetay);
+            context.SaveChanges();
+            return RedirectToAction("list");
+        }
     }
 }

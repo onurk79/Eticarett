@@ -35,6 +35,13 @@ namespace Eticarett.Areas.Admin.Controllers
             context.SaveChanges();
             return RedirectToAction("List");
         }
+        public ActionResult Delete(int id)
+        {
+            UrunFiyat UrunFiyat = context.UrunFiyat.Find(id);
+            context.UrunFiyat.Remove(UrunFiyat);
+            context.SaveChanges();
+            return RedirectToAction("list");
+        }
     }
    
 }

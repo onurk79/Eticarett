@@ -12,8 +12,6 @@ namespace Eticarett.ViewModels
         public int Id { get; set; }
         public string MarkaAdi { get; set; }
         public string MarkaAcıklmasi { get; set; }
-        public byte[] MarkaLogo { get; set; }
-        public WebImage Image { get; set; }
         public string imagePath { get; set; }
     }
 }

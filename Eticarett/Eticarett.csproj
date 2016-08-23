@@ -133,6 +133,8 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomesController.cs" />
     <Compile Include="Areas\Admin\Controllers\KampanyaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\KategoriController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MarkaController.cs" />
     <Compile Include="Areas\Admin\Controllers\UrunController.cs" />
     <Compile Include="Areas\Admin\Controllers\UrunDetayController.cs" />
     <Compile Include="Areas\Admin\Controllers\UrunFiyatController.cs" />
@@ -142,6 +144,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Image.cs" />
+    <Compile Include="Infrastructure\Prince.cs" />
     <Compile Include="Models\Banka.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -381,6 +385,10 @@
     <Content Include="Areas\Admin\Views\UrunFiyat\List.cshtml" />
     <Content Include="Areas\Admin\Views\UrunFiyat\New.cshtml" />
     <Content Include="Areas\Admin\Views\Urun\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Kategori\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Kategori\New.cshtml" />
+    <Content Include="Areas\Admin\Views\Marka\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Marka\New.cshtml" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>

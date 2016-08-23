@@ -68,5 +68,12 @@ namespace Eticarett.Areas.Admin.Controllers
 
             return RedirectToAction("List");
         }
+        public ActionResult Delete(int id)
+        {
+            Kampanya Kampanya = context.Kampanya.Find(id);
+            context.Kampanya.Remove(Kampanya);
+            context.SaveChanges();
+            return RedirectToAction("list");
+        }
     }
 }
