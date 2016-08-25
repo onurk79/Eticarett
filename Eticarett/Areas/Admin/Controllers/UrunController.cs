@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Eticarett.Areas.Admin.Controllers
 {
-    [SelectedTab("UrunEkle")]
+    [Authorize(Roles = "admin")]
     public class UrunController : Controller
     {
         private Entitie context = new Entitie();

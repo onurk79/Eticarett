@@ -8,7 +8,7 @@ using Eticarett.Infrastructure;
 
 namespace Eticarett.Areas.Admin.Controllers
 {
-    [SelectedTab("Homes")]
+    [Authorize(Roles = "admin")]
     public class HomesController : Controller
     {
         private Entitie context = new Entitie(); 

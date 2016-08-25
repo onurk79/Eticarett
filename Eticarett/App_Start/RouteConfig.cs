@@ -16,9 +16,8 @@ namespace Eticarett
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute("Home", "", new { controller = "Home", action = "Index" });
             routes.MapRoute("", "List", new { controller = "Home", action = "List" });
-            routes.MapRoute("Indev", "Index", new { controller = "Login", action = "Index" });
             routes.MapRoute("Login", "Login", new { controller = "Login", action = "Login" });
-            routes.MapRoute("Save", "Save", new { controller = "Login", action = "Save" });
+            routes.MapRoute("Logout", "Logout", new { controller = "Login", action = "Logout" });
             //routes.MapRoute("UrunNew", "New", new { controller = "Urun", action = "New" }, namespaces);
             //routes.MapRoute("HomesList", "List", new { controller = "Homes", action = "List" }, namespaces);
             //routes.MapRoute("KampanyaList", "List", new { controller = "Kampanya", action = "List" }, namespaces);

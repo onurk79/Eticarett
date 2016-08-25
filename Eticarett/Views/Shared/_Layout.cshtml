@@ -72,12 +72,21 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Hesabım</a></li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name</a></li>
 
-                                <li><a href="checkout.html"><i class="glyphicon glyphicon-screenshot"></i> Çıkış</a></li>
+                                <li><a href="@Url.Action("Logout", "Login")"> <i class="glyphicon glyphicon-screenshot"></i> Çıkış</a></li>
+                                }
                                 <li><a href="cart.html"><i class="glyphicon glyphicon-shopping-cart"></i> Sepet</a></li>
-                                <li><a href="@Url.Action("Index", "Login", new {})"> <i class="glyphicon glyphicon-lock"></i>Giriş </a></li>
-                                <li><a href="@Url.Action("List", "Homes", new {area="admin"})"> <i class="fa fa-lock"></i> Admin</a> </li>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                <li><a href="@Url.Action("Login", "Login", new { })"> <i class="glyphicon glyphicon-lock"></i>Giriş </a></li>
+                                }
+                                @if (User.IsInRole("admin"))
+                                {
+                                <li><a href="@Url.Action("List", "Homes", new { area = "admin" })"> <i class="fa fa-lock"></i> Admin</a> </li>
+                                }
                             </ul>
                         </div>
                     </div>

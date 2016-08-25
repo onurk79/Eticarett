@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace Eticarett.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class KategoriController : Controller
     {
         private Entitie context =new Entitie();

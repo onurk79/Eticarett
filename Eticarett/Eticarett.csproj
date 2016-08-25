@@ -148,6 +148,7 @@
     <Compile Include="Infrastructure\Image.cs" />
     <Compile Include="Infrastructure\PageDataForData.cs" />
     <Compile Include="Infrastructure\Prince.cs" />
+    <Compile Include="Infrastructure\RoleProvider.cs" />
     <Compile Include="Models\Banka.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -351,7 +352,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -392,6 +392,7 @@
     <Content Include="Areas\Admin\Views\Marka\New.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Home\List.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

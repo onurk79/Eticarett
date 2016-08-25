@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Eticarett.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class UrunDetayController : Controller
     {
         private Entitie context = new Entitie();

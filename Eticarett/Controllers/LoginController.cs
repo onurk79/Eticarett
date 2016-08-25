@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Eticarett.Controllers
 {
@@ -12,28 +13,66 @@ namespace Eticarett.Controllers
     {
         private Entitie context = new Entitie();
         //GET: Login
-        [HttpPost]
-        public ActionResult Index(Uye üye)
-        {
-            return View();
-        }
-        
-        public ActionResult Index()
+        public ActionResult Login()
         {
             return View(new Uye());
         }
-       
-        public ActionResult login(Üye üye)
+        [HttpPost]
+        public ActionResult NewUser(ViewModels.Uye üye)
+        {
+            if (üye.Parola == üye.ParolaTekrar)
+            {
+                if (context.Üye.Where(x => x.Eposta == üye.Eposta).Count() == 0)
+                {
+                    Eticarett.Models.Üye _uye = new Üye();
+                    _uye.Eposta = üye.Eposta;
+                    _uye.Parola = üye.Parola;
+                    _uye.RolId = 1;
+                    context.Üye.Add(_uye);
+                    context.SaveChanges();
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("Eposta", "E-posta  Kayıtlı!");
+                    return RedirectToAction("Login", "Login", üye);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("Parola", "Şifreler Uyuşmuyor!");
+                return RedirectToAction("Login", "Login", üye);
+            }
+        }
+        
+          
+           
+       [HttpPost]
+        public ActionResult Login(ViewModels.Uye üye,string returnUrl)
         {
             Üye üye1=  context.Üye.Where(x => x.Eposta == üye.Eposta && x.Parola == üye.Parola).SingleOrDefault();
-            return View();
+            if(üye1==null)
+            {
+                ModelState.AddModelError("Parola", "E-posta yada şifre yanliş");
+                return View(üye);
+            }
+            else {
+                FormsAuthentication.SetAuthCookie(üye1.Eposta, true);
+                if (!string.IsNullOrWhiteSpace(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
         }
-        public ActionResult Save(Üye üye)
+     
+        public ActionResult Logout()
         {
-           
-            context.Üye.Add(üye);
-            context.SaveChanges();
-            return View();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
