@@ -11,7 +11,7 @@ using Eticarett.Infrastructure;
 
 namespace Eticarett.ViewModels
 {
-    public class DigerUrunler
+    public class Urun
     {
         public decimal Fiyat { get; set; }
         public string ResimYolu { get; set; }
@@ -20,9 +20,19 @@ namespace Eticarett.ViewModels
     }
     public class KampanyalıUrunler
     {
-        public PageData<DigerUrunler> kampanyalıUrunler { get; set; }
+        public PageData<Urun> kampanyalıUrunler { get; set; }
         public IList<ViewModels.Marka> Marka { get; set; }
         public IEnumerable<Katagori> Kategori { get; set; }
+        public int Page { get; set; }
     }
-   
+    public class Urunler
+    {
+        public PageData<Urun> UrunlerList { get; set; }
+        public IList<ViewModels.Marka> Marka { get; set; }
+        public IEnumerable<Katagori> Kategori { get; set; }
+        public int Page { get; set; }
+        public bool  Markamı { get; set; }
+        public int id { get; set; }
+    }
+
 }

@@ -30,21 +30,12 @@ namespace Eticarett.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult New(UrunDetaylari UrunDetay,HttpPostedFileBase fileUploader)
+        public ActionResult New(UrunDetaylari UrunDetay, HttpPostedFileBase fileUploader)
         {
-            if (fileUploader != null)
-            {
-                string fileName = string.Empty;
-                string destinationPath = string.Empty;
-                fileName = Path.GetFileName(fileUploader.FileName);
-                byte[] img = null;
-                BinaryReader br = new BinaryReader(fileUploader.InputStream);
-                img = br.ReadBytes((int)fileUploader.InputStream.Length);
-                UrunDetay.resim = img;
-                context.UrunDetaylari.Add(UrunDetay);
-                context.SaveChanges();
-
-            }
+            Infrastructure.ImageSave Image = new Infrastructure.ImageSave(fileUploader);
+            UrunDetay.resim = Image.Image;
+            context.UrunDetaylari.Add(UrunDetay);
+            context.SaveChanges();
             return RedirectToAction("List");
         }
         public ActionResult Delete(int id)

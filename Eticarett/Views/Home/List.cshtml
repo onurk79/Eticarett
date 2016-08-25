@@ -1,0 +1,180 @@
+﻿@model Eticarett.ViewModels.Urunler
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home | E-Ticaret</title>
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+<body>
+
+    @using (Html.BeginForm())
+    {
+
+    <!--/slider-->
+
+
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="left-sidebar">
+                            <h2>Kategori</h2>
+                            <div class="panel-group category-products" id="accordian">
+                                <!--category-productsr-->
+                                @*<div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+                                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                    Sportswear
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="sportswear" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <ul>
+                                                    <li><a href="#">Nike </a></li>
+                                                    <li><a href="#">Under Armour </a></li>
+                                                    <li><a href="#">Adidas </a></li>
+                                                    <li><a href="#">Puma</a></li>
+                                                    <li><a href="#">ASICS </a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+                                @foreach (var kategori in Model.Kategori)
+                                {
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                      
+                                            <h4 class="panel-title"><button class="btn-block">@Html.Hidden("",new{ id = kategori.Id, kampanya = false })</button><a href="@Url.Action("List" )">@kategori.KategoriAdi</a></h4>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div><!--/category-products-->
+
+                            <div class="brands_products">
+                                <!--brands_products-->
+                                <h2>Markalar</h2>
+
+
+                                @foreach (var Marka in Model.Marka)
+                                    {
+                                        
+                                    <div class="brands-name">
+
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a href="@Url.Action("List",new { id = Marka.Id, kampanya=true})"> <span class="pull-right">(count)</span><img src="@Marka.imagePath" alt="" />@Marka.MarkaAdi </a></li>
+
+
+                                        </ul>
+                                    </div>
+                                }
+
+                            </div><!--/brands_products-->
+
+                            <div class="price-range">
+                                <!--price-range-->
+                                <h2>Fiyat Aralığı</h2>
+                                <div class="well text-center">
+                                    <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br />
+                                    <b class="pull-left">0 ₺</b> <b class="pull-right">600 ₺</b>
+                                </div>
+                            </div><!--/price-range-->
+                            @*<div class="shipping text-center">*@
+                            <!--shipping-->
+                            @*<img src="images/home/shipping.jpg" alt="" />*@
+                            @*</div>*@
+                            <!--/shipping-->
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-9 padding-right">
+
+                        <div class="category-tab">
+                            <!--category-tab-->
+                           @*<div class="col-sm-12">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
+                                        <li><a href="#blazers" data-toggle="tab">Blazers</a></li>
+                                        <li><a href="#sunglass" data-toggle="tab">Sunglass</a></li>
+                                        <li><a href="#kids" data-toggle="tab">Kids</a></li>
+                                        <li><a href="#poloshirt" data-toggle="tab">Polo shirt</a></li>
+                                    </ul>
+                                </div>*@
+                            <div>
+                                <div class="btn-group pull-left">
+                                    @if (Model.UrunlerList.HasPreviousPage)
+                                    {
+                                        <a href="@Url.Action("list",  new{ Page = @Model.UrunlerList.PreviousPage})" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-chevron-left"></i> Önceki</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="btn btn-sm disabled btn-primary"> Önceki</a>
+                                    }
+                                </div>
+                                <div class="btn-group pull-right">
+                                    @if (Model.UrunlerList.HasNextPage)
+                                    {
+                                        <a href="@Url.Action("list", new{Page = @Model.UrunlerList.NextPage})" class="btn btn-sm btn-primary"> Sonraki<i class="glyphicon glyphicon-chevron-right"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#" class="btn btn-sm disabled btn-primary"> Sonraki</a>
+                                    }
+                                </div>
+                            </div>
+
+                            <br />
+                            <br />
+                            <br />
+                            <div class="tab-content">
+                                    <div class="tab-pane fade active in" >
+                                        @foreach (var i in Model.UrunlerList)
+                                        {
+                                        <div class="col-sm-3">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="@i.ResimYolu" alt="" />
+                                                        <h2>@i.Fiyat ₺</h2>
+                                                        <p>@i.UrunAdi</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        }
+
+                                    </div>
+                                </div>
+                        </div><!--/category-tab-->
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+</body>
+</html>
+

@@ -15,41 +15,12 @@ namespace Eticarett.Controllers
     public class HomeController : Controller
     {
 
-
-        public List<DigerUrunler> KampanyalıUrn(int page)
-        {
-            List<DigerUrunler> b = new List<DigerUrunler>();
-
-            var currentPosts = context.Kampanya.Where(p => p.BitisTarihi > DateTime.Now).OrderByDescending(p => p.BaslangıcTarihi)
-                .Skip((page - 1) * postsPerPage)
-                .Take(postsPerPage).ToList();
-            DigerUrunler urrun = new DigerUrunler();
-            foreach (var _urun in currentPosts)
-            {
-                Prince Fiyat = new Prince(_urun.UrunFiyat.AlisFiyati, _urun.UrunFiyat.KarOranı, _urun.UrunFiyat.KdvOrani, _urun.IndrimOranı);
-                urrun.Fiyat = Fiyat.Fiyat;
-                Image Image = new Image(_urun.UrunFiyat.UrunDetaylari.resim, _urun.UrunFiyat.UrunId, 484, 441);
-                urrun.ResimYolu = Image.ImagePath;
-                urrun.UrunId = _urun.UrunFiyat.UrunId;
-                urrun.UrunAdi = _urun.UrunFiyat.UrunDetaylari.model_cins;
-                b.Add(urrun);
-
-
-            }
-            return b;
-        }
-
-        private static int postsPerPage = 5;
+        private static int postsPerPage = 3;
         private Entitie context = new Entitie();
         public ActionResult Index(int page = 1)
         {
-            Lists MarkaKategori = new Lists();
-            IList<Urunler> Urunler = context.Urunler.OrderByDescending(p => p.Id).Take(10).ToList();
-
-
-
+           
             List<Marka> _markalist = new List<Marka>();
-
             IList<Markalar> Markalar = context.Markalar.ToList();
             foreach (var marka in Markalar)
             {
@@ -58,23 +29,84 @@ namespace Eticarett.Controllers
                 _marka.MarkaAcıklmasi = marka.MarkaAcıklmasi;
                 _marka.MarkaAdi = marka.MarkaAdi;
                 _markalist.Add(_marka);
-                Image Image = new Image(marka.MarkaLogo, marka.Id, 30, 50);
+                ImageLoad Image = new ImageLoad(marka.MarkaLogo, marka.Id, 30, 50);
                 _marka.imagePath = Image.ImagePath;
             }
-
             var totalPostCount = context.Kampanya.Count();
-
-            var currentPosts = KampanyalıUrn(page);
-
-
+            PageDataForData KampanyalıUrun = new PageDataForData(page, postsPerPage,true);
             return View(new KampanyalıUrunler()
             {
-                kampanyalıUrunler = new PageData<DigerUrunler>(currentPosts, totalPostCount, page, postsPerPage),
+                kampanyalıUrunler = new PageData<ViewModels.Urun>(KampanyalıUrun.Urunler, totalPostCount, page, postsPerPage),
                 Marka = _markalist,
-                Kategori = context.Katagori.ToList()
+                Kategori = context.Katagori.ToList(),
+                Page = page
             });
         }
 
+        public ActionResult List(int page = 1 )
+        {
+            List<Marka> _markalist = new List<Marka>();
+            IList<Markalar> Markalar = context.Markalar.ToList();
+            foreach (var marka in Markalar)
+            {
+                ViewModels.Marka _marka = new ViewModels.Marka();
+                _marka.Id = marka.Id;
+                _marka.MarkaAcıklmasi = marka.MarkaAcıklmasi;
+                _marka.MarkaAdi = marka.MarkaAdi;
+                _markalist.Add(_marka);
+                ImageLoad Image = new ImageLoad(marka.MarkaLogo, marka.Id, 30, 50);
+                _marka.imagePath = Image.ImagePath;
+            }
+            var totalPostCount = context.UrunDetaylari.Count();
+            PageDataForData Urun = new PageDataForData(page, postsPerPage, false);
+            return View(new ViewModels.Urunler()
+            {
+                UrunlerList = new PageData<ViewModels.Urun>(Urun.Urunler, totalPostCount, page, postsPerPage),
+                Marka = _markalist,
+                Kategori = context.Katagori.ToList(),
+                Page = page
+            });
+        }
+        [HttpPost]
+        public ActionResult List( ViewModels.Urunler id,int ids, bool kampanya, int page)
+        {
+            List<Marka> _markalist = new List<Marka>();
+            IList<Markalar> Markalar = context.Markalar.ToList();
+            foreach (var marka in Markalar)
+            {
+                ViewModels.Marka _marka = new ViewModels.Marka();
+                _marka.Id = marka.Id;
+                _marka.MarkaAcıklmasi = marka.MarkaAcıklmasi;
+                _marka.MarkaAdi = marka.MarkaAdi;
+                _markalist.Add(_marka);
+                ImageLoad Image = new ImageLoad(marka.MarkaLogo, marka.Id, 30, 50);
+                _marka.imagePath = Image.ImagePath;
+            }
+            if (id.Markamı)
+            {
+                var totalPostCount = context.UrunDetaylari.Where(x => x.Urunler.Markalar.Id == id.id).Count();
+                PageDataForData Urun = new PageDataForData(id.Page, postsPerPage, id.id,id.Markamı);
+                return View(new ViewModels.Urunler()
+                {
+                    UrunlerList = new PageData<ViewModels.Urun>(Urun.Urunler, totalPostCount, id.Page, postsPerPage),
+                    Marka = _markalist,
+                    Kategori = context.Katagori.ToList(),
+                    Page = id.Page
+                });
+            }
+            else
+            {
+                var totalPostCount = context.UrunDetaylari.Where(x => x.Urunler.Katagori.Id == id.id).Count();
+                PageDataForData Urun = new PageDataForData(id.Page, postsPerPage,id.id,id.Markamı);
+                return View(new ViewModels.Urunler()
+                {
+                    UrunlerList = new PageData<ViewModels.Urun>(Urun.Urunler, totalPostCount, id.Page, postsPerPage),
+                    Marka = _markalist,
+                    Kategori = context.Katagori.ToList(),
+                    Page = id.Page
+                });
+            }
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

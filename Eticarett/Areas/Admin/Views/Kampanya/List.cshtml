@@ -18,6 +18,9 @@
     <table class="table">
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.UrunFiyat.UrunDetaylari.model_cins)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.IndrimOranı)
             </th>
             <th>
@@ -36,6 +39,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrunFiyat.UrunDetaylari.model_cins)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IndrimOranı)
             </td>
