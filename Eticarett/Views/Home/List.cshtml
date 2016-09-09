@@ -8,16 +8,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Home | E-Ticaret</title>
-
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
 <body>
 
@@ -62,8 +52,8 @@
 
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                      
-                                            <h4 class="panel-title"><button class="btn-block">@Html.Hidden("",new{ id = kategori.Id, kampanya = false })</button><a href="@Url.Action("List" )">@kategori.KategoriAdi</a></h4>
+
+                                            <h4 class="panel-title"><a href="@Url.Action("List",new { id = kategori.Id, markamı=false} )">@kategori.KategoriAdi</a></h4>
                                         </div>
                                     </div>
                                 }
@@ -76,12 +66,16 @@
 
 
                                 @foreach (var Marka in Model.Marka)
-                                    {
-                                        
+                                {
+
                                     <div class="brands-name">
 
                                         <ul class="nav nav-pills nav-stacked">
-                                            <li><a href="@Url.Action("List",new { id = Marka.Id, kampanya=true})"> <span class="pull-right">(count)</span><img src="@Marka.imagePath" alt="" />@Marka.MarkaAdi </a></li>
+                                            <li>
+                                                <a href="@Url.Action("List",new { id = Marka.Id, markamı=true})">
+                                                    <span class="pull-right">(count)</span><img src="@Marka.imagePath" alt="" />@Marka.MarkaAdi
+                                                </a>
+                                            </li>
 
 
                                         </ul>
@@ -111,7 +105,7 @@
 
                         <div class="category-tab">
                             <!--category-tab-->
-                           @*<div class="col-sm-12">
+                            @*<div class="col-sm-12">
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
                                         <li><a href="#blazers" data-toggle="tab">Blazers</a></li>
@@ -147,9 +141,9 @@
                             <br />
                             <br />
                             <div class="tab-content">
-                                    <div class="tab-pane fade active in" >
-                                        @foreach (var i in Model.UrunlerList)
-                                        {
+                                <div class="tab-pane fade active in">
+                                    @foreach (var i in Model.UrunlerList)
+                                    {
                                         <div class="col-sm-3">
                                             <div class="product-image-wrapper">
                                                 <div class="single-products">
@@ -157,16 +151,15 @@
                                                         <img src="@i.ResimYolu" alt="" />
                                                         <h2>@i.Fiyat ₺</h2>
                                                         <p>@i.UrunAdi</p>
-                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Sepete Ekle</a>
-                                                    </div>
+                                                        <a href="@Url.Action("ShoppingCardAdd","Home",new { id = i.UrunId,urll= HttpContext.Current.Request.Url.PathAndQuery.ToString() })" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i>Sepete Ekle</a>                                                    </div>
 
                                                 </div>
                                             </div>
                                         </div>
-                                        }
+                                    }
 
-                                    </div>
                                 </div>
+                            </div>
                         </div><!--/category-tab-->
 
                     </div>

@@ -11,19 +11,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Home | E-Ticaret</title>
-
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
 <body>
-
+    <h1>@Session["Sepet"]</h1>
     @using (Html.BeginForm())
     {
 
@@ -50,7 +40,7 @@
                                             <h1>@Model.kampanyalıUrunler.Take(1).SingleOrDefault().UrunAdi</h1>
                                             <h2>@Model.kampanyalıUrunler.Take(1).SingleOrDefault().Fiyat ₺</h2>
                                             <p>------ </p>
-                                            <button type="button" class="btn btn-default get">Sepete Ekle</button>
+                                            <a href="@Url.Action("ShoppingCardAdd","Home",new { id =@Model.kampanyalıUrunler.Take(1).SingleOrDefault().UrunId,urll=HttpContext.Current.Request.Url.AbsolutePath.ToString() })" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i>Sepete Ekle</a>
                                         </div>
                                         <div class="col-sm-6">
                                             <img src="@Model.kampanyalıUrunler.Take(1).SingleOrDefault().ResimYolu" class="girl img-responsive" alt="" />
@@ -62,7 +52,7 @@
                                             <h1>@Model.kampanyalıUrunler.Skip(1).Take(1).SingleOrDefault().UrunAdi</h1>
                                             <h2>@Model.kampanyalıUrunler.Skip(1).Take(1).SingleOrDefault().Fiyat ₺</h2>
                                             <p>------ </p>
-                                            <button type="button" class="btn btn-default get">Sepete Ekle</button>
+                                            <a href="@Url.Action("ShoppingCardAdd","Home",new { id =@Model.kampanyalıUrunler.Skip(1).Take(1).SingleOrDefault().UrunId,urll=HttpContext.Current.Request.Url.AbsolutePath.ToString() })" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i>Sepete Ekle</a>
                                         </div>
                                         <div class="col-sm-6">
                                             <img src="@Model.kampanyalıUrunler.Skip(1).Take(1).SingleOrDefault().ResimYolu" class="girl img-responsive" alt="" />
@@ -76,7 +66,7 @@
                                                 <h1>@Model.kampanyalıUrunler.Skip(2).Take(1).SingleOrDefault().UrunAdi</h1>
                                                 <h2>@Model.kampanyalıUrunler.Skip(2).Take(1).SingleOrDefault().Fiyat ₺</h2>
                                                 <p>------ </p>
-                                                <button type="button" class="btn btn-default get">Sepete Ekle</button>
+                                                <a href="@Url.Action("ShoppingCardAdd","Home",new { id =@Model.kampanyalıUrunler.Skip(2).Take(1).SingleOrDefault().UrunId,urll=HttpContext.Current.Request.Url.AbsolutePath.ToString() })" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i>Sepete Ekle</a>
                                             </div>
                                             <div class="col-sm-6">
                                                 <img src="@Model.kampanyalıUrunler.Skip(2).Take(1).SingleOrDefault().ResimYolu" class="girl img-responsive" alt="" />
@@ -133,9 +123,11 @@
 
                                 @foreach (var kategori in Model.Kategori)
                                 {
+
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h4 class="panel-title"><a href="#">@kategori.KategoriAdi</a></h4>
+
+                                            <h4 class="panel-title"><a href="@Url.Action("List", new { id = kategori.Id, markamı = false })">@kategori.KategoriAdi</a></h4>
                                         </div>
                                     </div>
                                 }
@@ -152,7 +144,7 @@
                                     <div class="brands-name">
 
                                         <ul class="nav nav-pills nav-stacked">
-                                            <li><a href="#"> <span class="pull-right">(count)</span><img src="@Marka.imagePath" alt="" />@Marka.MarkaAdi </a></li>
+                                            <li><a href="@Url.Action("List", new { id = Marka.Id, markamı = true })"> <span class="pull-right">(count)</span><img src="@Marka.imagePath" alt="" />@Marka.MarkaAdi </a></li>
 
 
                                         </ul>
@@ -186,7 +178,7 @@
                                 <div class="btn-group pull-left">
                                     @if (Model.kampanyalıUrunler.HasPreviousPage)
                                     {
-                                        <a href="@Url.Action("Index", new { page=@Model.kampanyalıUrunler.PreviousPage})" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-chevron-left"></i> Önceki</a>
+                                        <a href="@Url.Action("Index", new { page = @Model.kampanyalıUrunler.PreviousPage })" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-chevron-left"></i> Önceki</a>
                                     }
                                     else
                                     {
@@ -196,7 +188,7 @@
                                 <div class="btn-group pull-right">
                                     @if (Model.kampanyalıUrunler.HasNextPage)
                                     {
-                                        <a href="@Url.Action("Index", new { page=@Model.kampanyalıUrunler.NextPage})" class="btn btn-sm btn-primary"> Sonraki<i class="glyphicon glyphicon-chevron-right"></i></a>
+                                        <a href="@Url.Action("Index", new { page = @Model.kampanyalıUrunler.NextPage })" class="btn btn-sm btn-primary"> Sonraki<i class="glyphicon glyphicon-chevron-right"></i></a>
                                     }
                                     else
                                     {
@@ -204,40 +196,47 @@
                                     }
                                 </div>
                             </div>
-                      
-                        <br />
-                        <br />
-                        <br />
-                        <div>
-                            @foreach (var i in Model.kampanyalıUrunler)
-                            { 
-                                <div class="col-sm-4">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="@i.ResimYolu" alt="" />
-                                                <h2>@i.Fiyat ₺</h2>
-                                                <p>@i.UrunAdi</p>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="glyphicon glyphicon-shopping-cart"></i>Add to cart</a>
-                                            </div>
-                                            <div class="product-overlay">
-                                                <div class="overlay-content">
+
+                            <br />
+                            <br />
+                            <br />
+                            <div>
+                                @foreach (var i in Model.kampanyalıUrunler)
+                                {
+                                    <div class="col-sm-4">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    @*<a href="@Url.Action("Details", "Home", new { id = @i.UrunId })">  <img src="@i.ResimYolu" alt="" /></a>*@
+                                                    <img src="@i.ResimYolu" alt="" />
                                                     <h2>@i.Fiyat ₺</h2>
                                                     <p>@i.UrunAdi</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i class="glyphicon glyphicon-shopping-cart "></i>Add to cart</a>
+                                                    <a href="@Url.Action("ShoppingCardAdd","Home",new { id = i.UrunId,urll=HttpContext.Current.Request.Url.PathAndQuery.ToString() })" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i>Sepete Ekle</a>
+
+                                                </div>
+                                                <div class="product-overlay">
+
+                                                    <div class="overlay-content">
+
+                                                        @*<a href="@Url.Action("Details", "Home", new { id = @i.UrunId })">*@
+                                                        <h2>@i.Fiyat ₺</h2>
+                                                        <p> @i.UrunAdi</p>
+                                                        @*</a>*@
+                                                        <a href="@Url.Action("ShoppingCardAdd","Home",new { id = i.UrunId,urll= HttpContext.Current.Request.Url.PathAndQuery.ToString() })" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i>Sepete Ekle</a>
+
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="choose">
-                                            <ul class="nav nav-pills nav-justified">
+                                            <div class="choose">
+                                                <ul class="nav nav-pills nav-justified">
 
-                                                <li><a href="#"><i class="glyphicon glyphicon-transfer"></i>Karşılaştır</a></li>
-                                            </ul>
+                                                    <li><a href="#"><i class="glyphicon glyphicon-transfer"></i>Karşılaştır</a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            }
-                      </div>
+                                }
+                            </div>
                         </div><!--features_items-->
 
                         <div class="category-tab">
@@ -252,61 +251,61 @@
                                     </ul>
                                 </div>*@
                             @*<div class="tab-content">
-                                <div class="tab-pane fade active in" id="tshirt">
-                                    <div class="col-sm-3">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <img src="images/home/gallery1.jpg" alt="" />
-                                                    <h2>$56</h2>
-                                                    <p>Easy Polo Black Edition</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                </div>
+                                    <div class="tab-pane fade active in" id="tshirt">
+                                        <div class="col-sm-3">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="images/home/gallery1.jpg" alt="" />
+                                                        <h2>$56</h2>
+                                                        <p>Easy Polo Black Edition</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </div>
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="images/home/gallery2.jpg" alt="" />
+                                                        <h2>$56</h2>
+                                                        <p>Easy Polo Black Edition</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="images/home/gallery3.jpg" alt="" />
+                                                        <h2>$56</h2>
+                                                        <p>Easy Polo Black Edition</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="images/home/gallery4.jpg" alt="" />
+                                                        <h2>$56</h2>
+                                                        <p>Easy Polo Black Edition</p>
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <img src="images/home/gallery2.jpg" alt="" />
-                                                    <h2>$56</h2>
-                                                    <p>Easy Polo Black Edition</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <img src="images/home/gallery3.jpg" alt="" />
-                                                    <h2>$56</h2>
-                                                    <p>Easy Polo Black Edition</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <img src="images/home/gallery4.jpg" alt="" />
-                                                    <h2>$56</h2>
-                                                    <p>Easy Polo Black Edition</p>
-                                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>*@
+                                </div>*@
                         </div><!--/category-tab-->
 
                     </div>
@@ -317,7 +316,7 @@
                 </div>
             </div>
         </section>
-    }
 
+    }
 </body>
 </html>

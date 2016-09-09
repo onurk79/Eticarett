@@ -72,12 +72,21 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Hesabım</a></li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> @User.Identity.Name</a></li>
 
-                                <li><a href="checkout.html"><i class="glyphicon glyphicon-screenshot"></i> Çıkış</a></li>
+                                    <li><span class="glyphicon glyphicon-screenshot">@Html.RouteLink("Çıkış", "Logout") </span></li>
+                                }
                                 <li><a href="cart.html"><i class="glyphicon glyphicon-shopping-cart"></i> Sepet</a></li>
-                                <li><a href="@Url.Action("Index", "Login", new {})"> <i class="glyphicon glyphicon-lock"></i>Giriş </a></li>
-                                <li><a href="@Url.Action("ekle", "UrunEkle", new {area="admin"})"> <i class="fa fa-lock"></i> Admin</a> </li>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li><a href="@Url.Action("Login", "Login", new { })"> <i class="glyphicon glyphicon-lock"></i>Giriş </a></li>
+                                }
+                                @if (User.IsInRole("admin"))
+                                {
+                                    <li><a href="@Url.Action("List", "Homes", new { area = "admin" })"> <i class="fa fa-lock"></i> Admin</a> </li>
+                                }
                             </ul>
                         </div>
                     </div>
@@ -135,7 +144,59 @@
         </div><!--/header-bottom-->
     </header>
     @RenderBody()
- 
+    <footer id="footer">
+        <!--Footer-->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="companyinfo">
+                            <h2><span>e</span>-Tİcaret</h2>
+                            <p>---------</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="address">
+                            <img src="images/home/map.png" alt="" />
+                            <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Service</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Online Help</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">Order Status</a></li>
+                                <li><a href="#">Change Location</a></li>
+                                <li><a href="#">FAQ’s</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
+
+                </div>
+            </div>
+        </div>
+
+    </footer><!--/Footer-->
 
 
 

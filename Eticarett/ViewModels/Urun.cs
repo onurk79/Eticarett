@@ -13,7 +13,7 @@ namespace Eticarett.ViewModels
 {
     public class Urun
     {
-        public decimal Fiyat { get; set; }
+        public string Fiyat { get; set; }
         public string ResimYolu { get; set; }
         public string UrunAdi { get; set; }
         public int UrunId { get; set; }
@@ -33,6 +33,13 @@ namespace Eticarett.ViewModels
         public int Page { get; set; }
         public bool  Markamı { get; set; }
         public int id { get; set; }
+    }
+    public class Detay
+    {
+        public IList<ViewModels.Marka> Marka { get; set; }
+        public IEnumerable<Katagori> Kategori { get; set; }
+        public OzellikDetay detay { get; set; }
+        public string Fiyat { get; set; }
     }
 
 }

@@ -10,7 +10,8 @@ namespace Eticarett
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                            "~/Scripts/jquery-{version}.js"));
-
+            bundles.Add(new ScriptBundle("~/bundles/jquery-unobtrusive").
+                Include("~/Scripts/jquery.unobtrusive-ajax.js"));
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 

@@ -7,26 +7,25 @@ namespace Eticarett.Infrastructure
 {
     public class Prince
     {
-        public decimal Fiyat { get; set; }
+        public string Fiyat { get; set; }
+        public decimal Kdv { get; set; }
+        public decimal Indirim { get; set; }
         public Prince(decimal alıs, float karOranı, float kdvOranı, float indirimOranı)
         {
-
             decimal kar = alıs * Convert.ToDecimal(karOranı) / 100;
-            decimal kdv = (kar + alıs) * Convert.ToDecimal(kdvOranı) / 100;
-            decimal fiyat = kar + kdv + alıs;
-            decimal indirim = fiyat * Convert.ToDecimal(indirimOranı) / 100;
-            Fiyat = fiyat - indirim;
-        }
+            Kdv = (kar + alıs) * Convert.ToDecimal(kdvOranı) / 100;
+            decimal fiyat = kar + Kdv + alıs;
+            Indirim = fiyat * Convert.ToDecimal(indirimOranı) / 100;
+            Fiyat = string.Format("{0:0,0.00}", fiyat - Indirim);
 
+        }
         public Prince(decimal alıs, float karOranı, float kdvOranı)
         {
-
             decimal kar = alıs * Convert.ToDecimal(karOranı) / 100;
-            decimal kdv = (kar + alıs) * Convert.ToDecimal(kdvOranı) / 100;
-            Fiyat = kar + kdv + alıs;
-
-
-
+            Kdv = (kar + alıs) * Convert.ToDecimal(kdvOranı) / 100;
+            Fiyat = string.Format("{0:0,0.00}", (kar + Kdv + alıs));
         }
+
+
     }
 }

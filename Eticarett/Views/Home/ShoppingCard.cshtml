@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<body>
+@using (Ajax.BeginForm("Güncelle", "Home", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "divSonuc" }, new { id = "formKapsayici" }))
+{
+    <section id="cart_items">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Shopping Cart</li>
+                </ol>
+            </div>
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Ürün</td>
+                            <td class="description"></td>
+                            <td class="price">Fiyat</td>
+                            <td class="quantity">Adet</td>
+                            <td class="total">Toplam</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @using Eticarett.ViewModels;
+                        @for (int i = 1; i < Session.Count; i++)
+                        {
+                            Sepet sepet;
+                            sepet = (Sepet)(Session[Session.Keys[i].ToString()]);
+                            <tr>
+                                <td class="cart_product">
+                                    <a href=""><img src="@sepet.ResimYolu" alt=""></a>
+                                </td>
+                                <td class="cart_description col-lg-pull-3">
+                                    <div>
+                                        <h4> <a href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@sepet.UrunAdi</a></h4>
+                                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web ID: @sepet.Id</p>
+                                    </div>
+
+                                </td>
+                                <td class="cart_price">
+                                    <p>@sepet.Fiyat ₺</p>
+                                </td>
+                                <td class="cart_quantity">
+                                    <div class="cart_quantity_button">
+                                        <a class="cart_quantity_up" href=""> + </a>
+                                        <input class="cart_quantity_input" type="text" name="quantity" value="@sepet.Adet" autocomplete="off" size="2">
+                                        <a class="cart_quantity_down" href=""> - </a>
+                                    </div>
+                                </td>
+                                <td class="cart_total">
+                                    <p class="cart_total_price">@sepet.ToplamFiyat</p>
+                                </td>
+                                <td class="cart_delete">
+                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section> <!--/#cart_items-->
+   
+        <div id="divSonuc">
+            <div class="container">
+                <div class="heading">
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-push-3">
+                        <div class="total_area">
+                            <ul>
+                                <li>Sepet Toplam <span>$59</span></li>
+                                <li>Kdv <span>$2</span></li>
+                                <li>Kargo <span>Free</span></li>
+                                <li>Toplam <span></span></li>
+                            </ul>
+                            <input type="submit" value="Güncelle" />
+                            <a class="btn btn-default check_out" href="">Çık</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/#do_action-->
+    }
+</body>
+@Scripts.Render("~/bundles/jquery-unobtrusive")
+</html>

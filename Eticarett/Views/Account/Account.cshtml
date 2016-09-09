@@ -1,0 +1,306 @@
+﻿@model Eticarett.Models.Üye
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+
+<body>
+    <div>
+        <h4>Üye</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <ul>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Isim)
+                </dt>
+
+                <dd>
+
+                <li type="button" data-toggle="modal" data-target="#Isim"> @Html.DisplayFor(model => model.Isim)<span class="glyphicon glyphicon-edit"></span></li>
+                </dd>
+            </ul>
+            <ul>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Soyisim)
+                </dt>
+
+                <dd>
+
+                <li type="button" data-toggle="modal" data-target="#Soyisim">@Html.DisplayFor(model => model.Soyisim)<span class="glyphicon glyphicon-edit"></span></li>
+                </dd>
+            </ul>
+            <ul>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Adres)
+                </dt>
+
+                <dd>
+
+                <li type="button" data-toggle="modal" data-target="#Adres">@Html.DisplayFor(model => model.Adres)<span class="glyphicon glyphicon-edit"></span></li>
+                </dd>
+            </ul>
+            <ul>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Eposta)
+                </dt>
+
+                <dd>
+
+                <li type="button" data-toggle="modal" data-target="#Eposta"> @Html.DisplayFor(model => model.Eposta)<span class="glyphicon glyphicon-edit"></span></li>
+                </dd>
+            </ul>
+            <ul>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tel)
+                </dt>
+
+                <dd>
+
+                <li type="button" data-toggle="modal" data-target="#Tel">@Html.DisplayFor(model => model.Tel)<span class="glyphicon glyphicon-edit"></span></li>
+                </dd>
+            </ul>
+            <ul>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Parola)
+                </dt>
+
+                <dd>
+
+                <li type="button" data-toggle="modal" data-target="#Parola" data-whatever="@Model.Parola">@Html.DisplayFor(model => model.Parola)<span class="glyphicon glyphicon-edit"></span></li>
+                </dd>
+            </ul>
+            <ul>
+                <dt>
+                    @Html.DisplayNameFor(model => model.GuvenlikSorusu)
+                </dt>
+
+                <dd>
+
+                <li type="button" id="1" data-toggle="modal" data-target="#GuvenlikSorusu">@Html.DisplayFor(model => model.GuvenlikSorusu)<span class="glyphicon glyphicon-edit"></span></li>
+                </dd>
+            </ul>
+
+
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+
+
+    @using (Html.BeginForm())
+    {
+        <div class="modal fade" id="GuvenlikSorusu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Güncelle</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.GuvenlikSorusu, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(x => x.GuvenlikSorusu, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.ValidationMessageFor(model => model.GuvenlikSorusu, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.GuvenlikCevabı, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(x => x.GuvenlikCevabı, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.ValidationMessageFor(model => model.GuvenlikCevabı, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <input type="submit" value="Kaydet" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm())
+    {
+        <div class="modal fade" id="Parola" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Güncelle</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Parola, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(x => x.Parola, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    @Html.ValidationMessageFor(model => model.Parola, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Parola, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(x => x.Parola, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    @Html.ValidationMessageFor(model => model.Parola, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <input type="submit" value="Kaydet" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm())
+    {
+        <div class="modal fade" id="Tel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Güncelle</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Tel, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(x => x.Tel, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <input type="submit" value="Kaydet" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm())
+    {
+        <div class="modal fade" id="Eposta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Güncelle</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Eposta, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(x => x.Eposta, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.ValidationMessageFor(model => model.Eposta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <input type="submit" value="Kaydet" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm())
+    {
+        <div class="modal fade" id="Adres" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Güncelle</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Adres, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(x => x.Adres, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.ValidationMessageFor(model => model.Adres, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <input type="submit" value="Kaydet" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm())
+    {
+        <div class="modal fade" id="Soyisim" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Güncelle</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Soyisim, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(x => x.Soyisim, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.ValidationMessageFor(model => model.Soyisim, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <input type="submit" value="Kaydet" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm())
+    {
+        <div class="modal fade" id="Isim" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Güncelle</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Isim, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(x => x.Isim, new { htmlAttributes = new { @class = "form-control" } })
+
+                                @Html.ValidationMessageFor(model => model.Isim, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <input type="submit" value="Kaydet" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</body>
+
+</html>

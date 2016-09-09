@@ -135,10 +135,12 @@
     <Compile Include="Areas\Admin\Controllers\KampanyaController.cs" />
     <Compile Include="Areas\Admin\Controllers\KategoriController.cs" />
     <Compile Include="Areas\Admin\Controllers\MarkaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RolController.cs" />
     <Compile Include="Areas\Admin\Controllers\UrunController.cs" />
     <Compile Include="Areas\Admin\Controllers\UrunDetayController.cs" />
     <Compile Include="Areas\Admin\Controllers\UrunFiyatController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Kampanya.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -149,6 +151,7 @@
     <Compile Include="Infrastructure\PageDataForData.cs" />
     <Compile Include="Infrastructure\Prince.cs" />
     <Compile Include="Infrastructure\RoleProvider.cs" />
+    <Compile Include="Infrastructure\ShoppingCart.cs" />
     <Compile Include="Models\Banka.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -229,6 +232,8 @@
     <Compile Include="Infrastructure\SelectedTabAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Marka.cs" />
+    <Compile Include="ViewModels\Sepet.cs" />
+    <Compile Include="ViewModels\SepetToplam.cs" />
     <Compile Include="ViewModels\Urun.cs" />
     <Compile Include="ViewModels\Uye.cs" />
   </ItemGroup>
@@ -337,7 +342,11 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -390,9 +399,15 @@
     <Content Include="Areas\Admin\Views\Kategori\New.cshtml" />
     <Content Include="Areas\Admin\Views\Marka\List.cshtml" />
     <Content Include="Areas\Admin\Views\Marka\New.cshtml" />
+    <Content Include="Areas\Admin\Views\Rol\List.cshtml" />
+    <Content Include="Areas\Admin\Views\Rol\Edit.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Home\List.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Login\iForgotMyPassword.cshtml" />
+    <Content Include="Views\Account\Account.cshtml" />
+    <Content Include="Views\Home\ShoppingCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

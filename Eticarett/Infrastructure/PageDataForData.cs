@@ -23,7 +23,7 @@ namespace Eticarett.Infrastructure
                 {
                     ViewModels.Urun urrun = new ViewModels.Urun();
                     Prince Fiyat = new Prince(_urun.UrunFiyat.AlisFiyati, _urun.UrunFiyat.KarOranı, _urun.UrunFiyat.KdvOrani, _urun.IndrimOranı);
-                    urrun.Fiyat = Fiyat.Fiyat;
+                    urrun.Fiyat =  Fiyat.Fiyat;
                     ImageLoad Image = new ImageLoad(_urun.UrunFiyat.UrunDetaylari.resim, _urun.UrunFiyat.UrunId, 484, 441);
                     urrun.ResimYolu = Image.ImagePath;
                     urrun.UrunId = _urun.UrunFiyat.UrunId;
@@ -46,7 +46,7 @@ namespace Eticarett.Infrastructure
                         {
                             ViewModels.Urun urrun = new ViewModels.Urun();
                             Prince Fiyat = new Prince(i.AlisFiyati, i.KarOranı, i.KdvOrani);
-                            urrun.Fiyat = Fiyat.Fiyat;
+                            urrun.Fiyat =  Fiyat.Fiyat;
                             ImageLoad Image = new ImageLoad(i.UrunDetaylari.resim, i.UrunId, 484, 441);
                             urrun.ResimYolu = Image.ImagePath;
                             urrun.UrunId = i.UrunId;
@@ -101,7 +101,7 @@ namespace Eticarett.Infrastructure
                             foreach (var b in i.Kampanya)
                             {
                                 Prince Fiyat = new Prince(i.AlisFiyati, i.KarOranı, i.KdvOrani, b.IndrimOranı);
-                                urrun.Fiyat = Fiyat.Fiyat;
+                                urrun.Fiyat =Fiyat.Fiyat;
                             }
                             ImageLoad Image = new ImageLoad(i.UrunDetaylari.resim, i.UrunId, 484, 441);
                             urrun.ResimYolu = Image.ImagePath;
@@ -125,7 +125,7 @@ namespace Eticarett.Infrastructure
                         {
                             ViewModels.Urun urrun = new ViewModels.Urun();
                             Prince Fiyat = new Prince(i.AlisFiyati, i.KarOranı, i.KdvOrani);
-                            urrun.Fiyat = Fiyat.Fiyat;
+                            urrun.Fiyat =Fiyat.Fiyat;
                             ImageLoad Image = new ImageLoad(i.UrunDetaylari.resim, i.UrunId, 484, 441);
                             urrun.ResimYolu = Image.ImagePath;
                             urrun.UrunId = i.UrunId;
@@ -138,7 +138,7 @@ namespace Eticarett.Infrastructure
                             foreach (var b in i.Kampanya)
                             {
                                 Prince Fiyat = new Prince(i.AlisFiyati, i.KarOranı, i.KdvOrani, b.IndrimOranı);
-                                urrun.Fiyat = Fiyat.Fiyat;
+                                urrun.Fiyat =Fiyat.Fiyat;
                             }
                             ImageLoad Image = new ImageLoad(i.UrunDetaylari.resim, i.UrunId, 484, 441);
                             urrun.ResimYolu = Image.ImagePath;

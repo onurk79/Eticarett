@@ -20,6 +20,18 @@ namespace Eticarett.Infrastructure
 
 
         }
+        public ImageLoad(byte[] images, int ıd)
+        {
+            MemoryStream ms = new MemoryStream(images, 0, images.Length);
+            ms.Write(images, 0, images.Length);
+            WebImage image = new WebImage(ms);
+        
+            var upload = "~\\images\\Database\\" + ıd ;
+            image.Save(upload);
+            ImagePath = "/images/Database/" + ıd  + "." + image.ImageFormat;
+
+
+        }
     }
 
     public class ImageSave
