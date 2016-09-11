@@ -28,7 +28,7 @@ namespace Eticarett.Controllers
                 _marka.imagePath = new ImageLoad(marka.MarkaLogo, marka.Id, 30, 50).ImagePath;
 
             }
-            var totalPostCount = context.Kampanya.Count();
+            var totalPostCount = context.Kampanya.Where(x=>x.BitisTarihi>DateTime.Now).Count();
             PageDataForData KampanyalıUrun = new PageDataForData(page, postsPerPage, true);
             return View(new KampanyalıUrunler()
             {
@@ -97,7 +97,6 @@ namespace Eticarett.Controllers
         private static bool durum = true;
         public ActionResult ShoppingCardAdd(int id, string urll)
         {
-
             if (durum || Session.Count == 0) { Session.Add("count", 1); durum = false; }
 
             else
@@ -122,20 +121,74 @@ namespace Eticarett.Controllers
             sepet.Id = id;
             UrunDetaylari Urun = context.UrunDetaylari.Where(x => x.Id == id).FirstOrDefault();
             sepet.UrunAdi = Urun.model_cins;
-            sepet.Kdv = new Prince(Urun.UrunFiyat.FirstOrDefault().AlisFiyati,Urun.UrunFiyat.FirstOrDefault().KarOranı,Urun.UrunFiyat.FirstOrDefault().KdvOrani).Kdv;
+            sepet.Kdv = new Prince(Urun.UrunFiyat.FirstOrDefault().AlisFiyati, Urun.UrunFiyat.FirstOrDefault().KarOranı, Urun.UrunFiyat.FirstOrDefault().KdvOrani).Kdv;
+
             sepet.ResimYolu = new ImageLoad(Urun.resim, id, 110, 110).ImagePath;
+
+            sepet.Sepett = new Prince(Urun.UrunFiyat.FirstOrDefault().AlisFiyati, Urun.UrunFiyat.FirstOrDefault().KarOranı, Urun.UrunFiyat.FirstOrDefault().KdvOrani).KarFiyat;
 
             if (Urun.UrunFiyat.FirstOrDefault().Kampanya.Count == 0)
                 sepet.Fiyat = new Prince(Urun.UrunFiyat.FirstOrDefault().AlisFiyati, Urun.UrunFiyat.FirstOrDefault().KarOranı, Urun.UrunFiyat.FirstOrDefault().KdvOrani).Fiyat;
             else
+            {
                 sepet.Fiyat = new Prince(Urun.UrunFiyat.FirstOrDefault().AlisFiyati, Urun.UrunFiyat.FirstOrDefault().KarOranı, Urun.UrunFiyat.FirstOrDefault().KdvOrani, Urun.UrunFiyat.FirstOrDefault().Kampanya.FirstOrDefault().IndrimOranı).Fiyat;
-            sepet.ToplamFiyat = string.Format("{0:0,0.00}", (Convert.ToDecimal(sepet.Fiyat) * sepet.Adet));
+                sepet.Indirim = new Prince(Urun.UrunFiyat.FirstOrDefault().AlisFiyati, Urun.UrunFiyat.FirstOrDefault().KarOranı, Urun.UrunFiyat.FirstOrDefault().KdvOrani, Urun.UrunFiyat.FirstOrDefault().Kampanya.FirstOrDefault().IndrimOranı).Indirim;
+            }
+            sepet.ToplamFiyat = (Convert.ToDecimal(sepet.Fiyat) * sepet.Adet).ToString();
             Session[id.ToString()] = sepet;
             return Redirect(urll);
         }
-        public ActionResult ShoppingCard()
+        public ActionResult ShoppingCard(int id = 0, bool add = false)
         {
-            return View();
+            if (id != 0)
+            {
+                ViewModels.Sepet sepet;
+                sepet = (ViewModels.Sepet)(Session[id.ToString()]);
+                if (add)
+                {
+                    string count = Session["count"].ToString();
+                    count = (Convert.ToInt32(count) + 1).ToString();
+                    Session.Add("count", count);
+                    sepet.Adet = sepet.Adet + 1;
+                    sepet.ToplamFiyat = (Convert.ToDecimal(sepet.Fiyat) * sepet.Adet).ToString();
+                    Session[id.ToString()] = sepet;
+                }
+                else
+                {
+                    if (sepet.Adet == 1)
+                    {
+                        string count = Session["count"].ToString();
+                        count = (Convert.ToInt32(count) - 1).ToString();
+                        Session.Add("count", count);
+                        Session.Remove(id.ToString());
+
+                    }
+                    else
+                    {
+                        sepet.Adet = sepet.Adet - 1;
+                        sepet.ToplamFiyat = (Convert.ToDecimal(sepet.Fiyat) * sepet.Adet).ToString();
+                        Session[id.ToString()] = sepet;
+                        string count = Session["count"].ToString();
+                        count = (Convert.ToInt32(count) - 1).ToString();
+                        Session.Add("count", count);
+                    }
+
+                }
+                HttpContext.Response.Redirect("ShoppingCard");
+            }
+
+            SepetToplam SepetToplam = new SepetToplam();
+            for (int i = 1; i < Session.Count; i++)
+            {
+                ViewModels.Sepet sepet;
+                sepet = (ViewModels.Sepet)(Session[Session.Keys[i].ToString()]);
+                SepetToplam.Toplam += Convert.ToDecimal(sepet.ToplamFiyat);
+                SepetToplam.Kdv += sepet.Kdv * sepet.Adet;
+                SepetToplam.Indirim += sepet.Indirim * sepet.Adet;
+                SepetToplam.Sepet += sepet.Sepett * sepet.Adet;
+            }
+          
+            return View(SepetToplam);
         }
         string Fiyat;
         public ActionResult Details(int id)
@@ -178,21 +231,12 @@ namespace Eticarett.Controllers
 
             });
         }
-        [HttpPost]
-        public SepetToplam CardUpdate()
+        public ActionResult CompareListAdd(int id)
         {
-            SepetToplam SepetToplam = new SepetToplam();
-            for (int i = 1; i < Session.Count; i++)
-            {
-                ViewModels.Sepet sepet;
-                sepet = (ViewModels.Sepet)(Session[Session.Keys[i].ToString()]);
-                SepetToplam.Toplam += Convert.ToDecimal( sepet.ToplamFiyat);
-                SepetToplam.Kdv += sepet.Kdv;
-                SepetToplam.Indirim += sepet.Indirim;
-                SepetToplam.Sepet += sepet.Sepett;
-            }
-            return SepetToplam;
+          
+            return View();
         }
+
 
     }
 }

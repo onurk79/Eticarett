@@ -35,11 +35,7 @@ namespace Eticarett.Controllers
             
             return View(_uye);
         }
-        //[Authorize]
-        //[HttpPost]
-        //public ActionResult Account(Üye a)
-        //{
-        //    return View();
-        //}
+     
+
     }
 }

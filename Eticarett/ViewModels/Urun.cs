@@ -17,6 +17,9 @@ namespace Eticarett.ViewModels
         public string ResimYolu { get; set; }
         public string UrunAdi { get; set; }
         public int UrunId { get; set; }
+        public DateTime BaslamaTarihi { get; set; }
+        public DateTime BitisTarihi { get; set; }
+        public string Acıklama { get; set; }
     }
     public class KampanyalıUrunler
     {

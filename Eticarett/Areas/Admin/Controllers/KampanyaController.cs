@@ -44,6 +44,7 @@ namespace Eticarett.Areas.Admin.Controllers
             ViewData["KategoriId"] = kategori;
             ViewData["MarkaId"] = marka;
             ViewData["UrunId"] = urun;
+            
             return View();
 
         }

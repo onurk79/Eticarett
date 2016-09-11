@@ -28,6 +28,9 @@ namespace Eticarett.Infrastructure
                     urrun.ResimYolu = Image.ImagePath;
                     urrun.UrunId = _urun.UrunFiyat.UrunId;
                     urrun.UrunAdi = _urun.UrunFiyat.UrunDetaylari.model_cins;
+                    urrun.BitisTarihi = _urun.BitisTarihi;
+                    urrun.BaslamaTarihi = _urun.BaslangıcTarihi;
+                    urrun.Acıklama = _urun.Acıklama;
                     Urunler.Add(urrun);
 
                 }

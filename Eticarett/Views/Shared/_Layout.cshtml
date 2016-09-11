@@ -8,7 +8,6 @@
     <title> E-Ticaret</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jqueryval")
     <link href="~/Content/Styles/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/Styles/prettyPhoto.css" rel="stylesheet">
     <link href="~/Content/Styles/price-range.css" rel="stylesheet">
@@ -131,69 +130,73 @@
             </div>
         </div><!--/header-bottom-->
     </header>
-        @RenderBody()
-    <footer id="footer">
-        <!--Footer-->
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <div class="companyinfo">
-                            <h2><span>e</span>-Tİcaret</h2>
-                            <p>---------</p>
-                        </div>
-                    </div>
+   
+            @RenderBody()
+     
 
-                    <div class="col-sm-3">
-                        <div class="address">
-                            <img src="images/home/map.png" alt="" />
-                            <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+        <footer id="footer">
+            <!--Footer-->
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="companyinfo">
+                                <h2><span>e</span>-Tİcaret</h2>
+                                <p>---------</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="address">
+                                <img src="images/home/map.png" alt="" />
+                                <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="footer-widget">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <div class="single-widget">
-                            <h2>Service</h2>
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#">Online Help</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Order Status</a></li>
-                                <li><a href="#">Change Location</a></li>
-                                <li><a href="#">FAQ’s</a></li>
-                            </ul>
+            <div class="footer-widget">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="single-widget">
+                                <h2>Service</h2>
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li><a href="#">Online Help</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">Order Status</a></li>
+                                    <li><a href="#">Change Location</a></li>
+                                    <li><a href="#">FAQ’s</a></li>
+                                </ul>
+                            </div>
                         </div>
+
+
                     </div>
-                   
-
                 </div>
             </div>
-        </div>
 
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <p class="pull-left">@System.DateTime.Now.Year</p>
-                  
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <p class="pull-left">@System.DateTime.Now.Year</p>
+
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </footer><!--/Footer-->
+        </footer><!--/Footer-->
 
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
 
-
-    <script src="~/Content/Scripts/jquery.js"></script>
-    <script src="~/Content/Scripts/bootstrap.min.js"></script>
-    <script src="~/Content/Scripts/jquery.scrollUp.min.js"></script>
-    <script src="~/Content/Scripts/price-range.js"></script>
-    <script src="~/Content/Scripts/jquery.prettyPhoto.js"></script>
-    <script src="~/Content/Scripts/main.js"></script>  
-    
+        <script src="~/Content/Scripts/jquery.js"></script>
+        <script src="~/Content/Scripts/bootstrap.min.js"></script>
+        <script src="~/Content/Scripts/jquery.scrollUp.min.js"></script>
+        <script src="~/Content/Scripts/price-range.js"></script>
+        <script src="~/Content/Scripts/jquery.prettyPhoto.js"></script>
+        <script src="~/Content/Scripts/main.js"></script>
+       
 </body>
 </html>
