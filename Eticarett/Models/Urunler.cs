@@ -17,7 +17,6 @@ namespace Eticarett.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Urunler()
         {
-            this.Resimler = new HashSet<Resimler>();
             this.UrunDetaylari = new HashSet<UrunDetaylari>();
         }
     
@@ -28,8 +27,6 @@ namespace Eticarett.Models
     
         public virtual Katagori Katagori { get; set; }
         public virtual Markalar Markalar { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Resimler> Resimler { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UrunDetaylari> UrunDetaylari { get; set; }
     }

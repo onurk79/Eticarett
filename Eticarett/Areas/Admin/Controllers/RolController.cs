@@ -7,8 +7,10 @@ using System.Web.Mvc;
 
 namespace Eticarett.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class RolController : Controller
-    {private Entitie context =new Entitie();
+    {
+        private Entitie context = new Entitie();
         // GET: Admin/Rol
         public ActionResult List()
         {
@@ -23,10 +25,10 @@ namespace Eticarett.Areas.Admin.Controllers
             });
             ViewData["RolId"] = Rol;
 
-            return View(new Üye() {Eposta=context.Üye.Where(x=>x.Id==Id).SingleOrDefault().Eposta });
+            return View(new Üye() { Eposta = context.Üye.Where(x => x.Id == Id).SingleOrDefault().Eposta });
         }
         [HttpPost]
-      public  ActionResult Edit( Üye uye)
+        public ActionResult Edit(Üye uye)
         {
             Üye Uye = context.Üye.Find(uye.Id);
             Uye.RolId = uye.RolId;
@@ -34,5 +36,6 @@ namespace Eticarett.Areas.Admin.Controllers
             return RedirectToAction("List");
         }
 
+       
     }
 }

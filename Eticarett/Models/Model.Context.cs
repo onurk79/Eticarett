@@ -31,7 +31,7 @@ namespace Eticarett.Models
         public virtual DbSet<Katagori> Katagori { get; set; }
         public virtual DbSet<Markalar> Markalar { get; set; }
         public virtual DbSet<OdemeSecenekleri> OdemeSecenekleri { get; set; }
-        public virtual DbSet<OzellikDetay> OzellikDetay { get; set; }
+        public virtual DbSet<Ozellik> Ozellik { get; set; }
         public virtual DbSet<Resimler> Resimler { get; set; }
         public virtual DbSet<Roller> Roller { get; set; }
         public virtual DbSet<Sepet> Sepet { get; set; }
@@ -43,7 +43,6 @@ namespace Eticarett.Models
         public virtual DbSet<UrunDetaylari> UrunDetaylari { get; set; }
         public virtual DbSet<UrunFiyat> UrunFiyat { get; set; }
         public virtual DbSet<Urunler> Urunler { get; set; }
-        public virtual DbSet<UrunOzellikler> UrunOzellikler { get; set; }
         public virtual DbSet<Üye> Üye { get; set; }
     }
 }

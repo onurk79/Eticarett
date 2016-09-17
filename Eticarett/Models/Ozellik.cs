@@ -12,14 +12,13 @@ namespace Eticarett.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OzellikDetay
+    public partial class Ozellik
     {
         public int Id { get; set; }
-        public int UrunId { get; set; }
-        public int UrunOzellikId { get; set; }
-        public string ÖzellikDetay { get; set; }
+        public string OzellikAdi { get; set; }
+        public string Özellik { get; set; }
+        public int ozellikId { get; set; }
     
         public virtual UrunDetaylari UrunDetaylari { get; set; }
-        public virtual UrunOzellikler UrunOzellikler { get; set; }
     }
 }

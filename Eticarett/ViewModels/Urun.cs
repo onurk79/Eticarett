@@ -20,6 +20,7 @@ namespace Eticarett.ViewModels
         public DateTime BaslamaTarihi { get; set; }
         public DateTime BitisTarihi { get; set; }
         public string Acıklama { get; set; }
+        public int id { get; set; }
     }
     public class KampanyalıUrunler
     {
@@ -41,8 +42,10 @@ namespace Eticarett.ViewModels
     {
         public IList<ViewModels.Marka> Marka { get; set; }
         public IEnumerable<Katagori> Kategori { get; set; }
-        public OzellikDetay detay { get; set; }
+        public IList<Ozellik>detay { get; set; }
         public string Fiyat { get; set; }
+        //public IList<string> resimler { get; set; }
+        public Urun urun { get; set; }
     }
 
 }

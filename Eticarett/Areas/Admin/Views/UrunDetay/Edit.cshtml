@@ -1,0 +1,107 @@
+﻿@model Eticarett.Models.UrunDetaylari
+<!DOCTYPE html>
+<head>
+    @{
+        ViewBag.Title = "Düzenle";
+    }
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        if('@ViewBag.Message' == 'File Uploaded Successfully')
+        {
+            alert('File Uploaded Successfully');
+        }
+
+        if ('@ViewBag.Message' == 'File is already exists') {
+            alert('File is already exists');
+        }
+
+        $('#uloadTable td img.link').live('click', function () {
+            var filename = $(this).parent().parent().parent().attr('id');
+            var path = $(this).parent().parent().parent().attr('id');
+            $(this).parent().parent().parent().remove();
+
+            $.ajax({
+                type: "post",
+                url: "/FileUpload/RemoveUploadFile?fileName=" + filename,
+                datatype: "json",
+                traditional: true,
+                success: function (data) {
+
+                    alert('File Deleted');
+                    if (data == 0) {
+                        $('#uloadTable').remove();
+                    }
+
+                }
+            });
+        });
+    });
+
+    </script>
+</head>
+<h2>Düzenle</h2>
+
+
+@using (Html.BeginForm("Edit", "UrunDetay", FormMethod.Post, new { @İd = "form1", @enctype = "multipart/form-data" }))
+{    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>UrunDetaylari</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Urunler.Acıklama, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model=>model.Urunler.Acıklama, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Urunler.Acıklama , "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.renk, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.renk, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.renk, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.stokSayisi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.stokSayisi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.stokSayisi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.resim, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img src="@ViewBag.image" />
+            </div>
+            <div class="col-md-10">
+                <input type="file" name="fileUploader" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.model_cins, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.model_cins, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.model_cins, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="@Url.Action( "List","UrunDetay")"> Geri</a>
+</div>

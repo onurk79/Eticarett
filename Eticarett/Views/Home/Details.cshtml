@@ -10,7 +10,7 @@
                         <h2>Kategori</h2>
                         <div class="panel-group category-products" id="accordian">
                             <!--category-productsr-->
-                       
+
                             @foreach (var kategori in Model.Kategori)
                             {
 
@@ -27,13 +27,13 @@
                             <!--brands_products-->
                             <h2>Markalar</h2>
 
-                            @foreach (var Marka in Model.Marka)
+                            @foreach (var Markam in Model.Marka)
                             {
 
                                 <div class="brands-name">
 
                                     <ul class="nav nav-pills nav-stacked">
-                                        <li><a href="@Url.Action("List",new { id = Marka.Id, markamı=true})"> <span class="pull-right">(count)</span><img src="@Marka.imagePath" alt="" />@Marka.MarkaAdi </a></li>
+                                        <li><a href="@Url.Action("List",new { id = Markam.Id, markamı=true})"> <span class="pull-right">(count)</span><img src="@Markam.imagePath" alt="" />@Markam.MarkaAdi </a></li>
 
 
                                     </ul>
@@ -48,52 +48,57 @@
                         <!--product-details-->
                         <div class="col-sm-5">
                             <div class="view-product">
-                                <img src="images/product-details/1.jpg" alt="" />
+                                <img src="@Model.urun.ResimYolu" alt="" />
                                 <h3>ZOOM</h3>
                             </div>
-                            <div id="similar-product" class="carousel slide" data-ride="carousel">
+                            @*<div id="similar-product" class="carousel slide" data-ride="carousel">
 
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner">
-                                    <div class="item active">
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner">
+                                        <div class="item active">
 
-                                        <a href=""><img src="images/product-details/similar3.jpg" alt=""></a>
+                                            <a href=""><img src="@Model.resimler.Take(1).SingleOrDefault()" alt=""></a>
+                                        </div>
+                                        @foreach (var b in Model.resimler.Skip(1))
+                                        {
+                                        <div class="item">
+                                            <a href=""><img src="@b" alt=""></a>
+
+                                        </div>
+                                        }
+
                                     </div>
-                                    <div class="item">
-                                        <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
 
-                                    </div>
-                                    <div class="item">
-                                        <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
-                                    </div>
-                                </div>
-
-                                <!-- Controls -->
-                                <a class="left item-control" href="#similar-product" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                                <a class="right item-control" href="#similar-product" data-slide="next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
+                                    <!-- Controls -->
+                                    <a class="left item-control" href="#similar-product" data-slide="prev">
+                                        <i class="fa fa-angle-left"></i>
+                                    </a>
+                                    <a class="right item-control" href="#similar-product" data-slide="next">
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>*@
 
                         </div>
                         <div class="col-sm-7">
                             <div class="product-information">
                                 <!--/product-information-->
                                 <img src="images/product-details/new.jpg" class="newarrival" alt="" />
-                                <h2>@Model.detay.UrunDetaylari.model_cins</h2>
-
+                                <h2>@Model.detay.FirstOrDefault().UrunDetaylari.model_cins</h2>
+                                @if (Model.urun.BitisTarihi > DateTime.Now)
+                                {
+                                    <p>@Model.urun.UrunAdi</p>
+                                    <p><b>Kampanya :</b>@Model.urun.Acıklama</p>
+                                    <p><b>Baslama Tarihi:</b>@Model.urun.BaslamaTarihi</p>
+                                    <p><b>Bitiş Tarihi:</b>@Model.urun.BitisTarihi</p>
+                                }
                                 <span>
                                     <span>@Model.Fiyat</span>
-                                    <label>Miktar:</label>
-                                    <input type="text" value="1" />
-                                    <button type="button" class="btn btn-fefault cart">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        Sepete Ekle
-                                    </button>
+                                    <a href="@Url.Action("ShoppingCardAdd","Home",new { id = Model.urun.UrunId,urll= HttpContext.Current.Request.Url.PathAndQuery.ToString() })"
+                                       class="btn btn-default">
+                                        <i class="glyphicon glyphicon-shopping-cart"></i>Sepete Ekle
+                                    </a>
                                 </span>
-                                @if (Model.detay.UrunDetaylari.stokSayisi > 0)
+                                @if (Model.detay.FirstOrDefault().UrunDetaylari.stokSayisi > 0)
                                 {
                                     <p><b>STOK:</b> Var</p>
                                 }
@@ -101,14 +106,14 @@
                                 {
                                     <p><b>STOK:</b> Yok</p>
                                 }
-                                <p><b>Condition:</b> New</p>
-                                <p><b>Marka:</b>@Model.detay.UrunDetaylari.Urunler.Markalar.MarkaAdi</p>
-
+                                <p><b>Marka:</b>@Model.detay.FirstOrDefault().UrunDetaylari.Urunler.Markalar.MarkaAdi</p>
+                                @foreach (var i in Model.detay)
+                                {
+                                    <p><b>@i.OzellikAdi:</b>@i.Özellik</p>
+                                }
                             </div><!--/product-information-->
                         </div>
                     </div><!--/product-details-->
-
-
 
                 </div>
             </div>

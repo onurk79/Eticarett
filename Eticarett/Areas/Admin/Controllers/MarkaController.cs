@@ -47,5 +47,26 @@ namespace Eticarett.Areas.Admin.Controllers
             }
             return RedirectToAction("List");
         }
+        public ActionResult Edit(int id)
+        {
+            Markalar marka = context.Markalar.Where(x => x.Id == id).SingleOrDefault();
+            ViewBag.image = new Infrastructure.ImageLoad(marka.MarkaLogo, marka.Id, 40, 40).ImagePath;
+            return View(marka);
+        }
+        [HttpPost]
+        public ActionResult Edit(Markalar Marka , HttpPostedFileBase fileUploader)
+        {
+            Markalar _marka = context.Markalar.Where(x => x.Id == Marka.Id).SingleOrDefault();
+            if (fileUploader != null)
+            {
+                Infrastructure.ImageSave Image = new Infrastructure.ImageSave(fileUploader);
+                _marka.MarkaLogo = Image.Image;
+            }
+            _marka.MarkaAcıklmasi = Marka.MarkaAcıklmasi;
+            _marka.MarkaAdi = Marka.MarkaAdi;
+          
+            context.SaveChanges();
+            return RedirectToAction("List");
+        }
     }
 }

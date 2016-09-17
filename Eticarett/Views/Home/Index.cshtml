@@ -225,7 +225,7 @@
                                             <div class="choose">
                                                 <ul class="nav nav-pills nav-justified">
 
-                                                    <li> <a href="#"><i class="glyphicon glyphicon-transfer"></i>Karşılaştır</a></li>
+                                                    <li> <a href="@Url.Action("CompareListAdd","Home",new {id=i.UrunId, urll = HttpContext.Current.Request.Url.PathAndQuery.ToString() })"><i class="glyphicon glyphicon-transfer"></i>Karşılaştır</a></li>
                                                 </ul>
                                             </div>
                                         </div>

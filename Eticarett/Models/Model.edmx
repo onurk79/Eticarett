@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Banka">
           <Key>
             <PropertyRef Name="Id" />
@@ -55,14 +55,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OdemeTipi" Type="text" Nullable="false" />
         </EntityType>
-        <EntityType Name="OzellikDetay">
+        <EntityType Name="Ozellik">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ozellikId" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UrunId" Type="int" Nullable="false" />
-          <Property Name="UrunOzellikId" Type="int" Nullable="false" />
-          <Property Name="ÖzellikDetay" Type="text" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="OzellikAdi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Özellik" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ozellikId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Resimler">
           <Key>
@@ -71,9 +71,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UrunId" Type="int" Nullable="false" />
           <Property Name="Resim" Type="image" Nullable="false" />
-          <Property Name="KatalogResmi" Type="image" />
-          <Property Name="SlideResmi" Type="image" />
-          <Property Name="ResimYolu" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="Roller">
           <Key>
@@ -170,13 +167,6 @@
           <Property Name="MarkaId" Type="int" Nullable="false" />
           <Property Name="Acıklama" Type="text" />
         </EntityType>
-        <EntityType Name="UrunOzellikler">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OzellikAdi" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
         <EntityType Name="Üye">
           <Key>
             <PropertyRef Name="Id" />
@@ -205,35 +195,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OzellikDetay_UrunDetaylari">
+        <Association Name="FK_Ozellik_UrunDetaylari">
           <End Role="UrunDetaylari" Type="Self.UrunDetaylari" Multiplicity="1" />
-          <End Role="OzellikDetay" Type="Self.OzellikDetay" Multiplicity="*" />
+          <End Role="Ozellik" Type="Self.Ozellik" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UrunDetaylari">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="OzellikDetay">
-              <PropertyRef Name="UrunId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OzellikDetay_UrunOzellikler">
-          <End Role="UrunOzellikler" Type="Self.UrunOzellikler" Multiplicity="1" />
-          <End Role="OzellikDetay" Type="Self.OzellikDetay" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UrunOzellikler">
+            <Dependent Role="Ozellik">
               <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OzellikDetay">
-              <PropertyRef Name="UrunOzellikId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Resimler_Urunler">
-          <End Role="Urunler" Type="Self.Urunler" Multiplicity="1" />
+        <Association Name="FK_Resimler_UrunDetaylari">
+          <End Role="UrunDetaylari" Type="Self.UrunDetaylari" Multiplicity="1" />
           <End Role="Resimler" Type="Self.Resimler" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Urunler">
+            <Principal Role="UrunDetaylari">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Resimler">
@@ -416,7 +394,7 @@
           <EntitySet Name="Katagori" EntityType="Self.Katagori" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Markalar" EntityType="Self.Markalar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OdemeSecenekleri" EntityType="Self.OdemeSecenekleri" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OzellikDetay" EntityType="Self.OzellikDetay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ozellik" EntityType="Self.Ozellik" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resimler" EntityType="Self.Resimler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roller" EntityType="Self.Roller" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sepet" EntityType="Self.Sepet" Schema="dbo" store:Type="Tables" />
@@ -428,22 +406,17 @@
           <EntitySet Name="UrunDetaylari" EntityType="Self.UrunDetaylari" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UrunFiyat" EntityType="Self.UrunFiyat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UrunOzellikler" EntityType="Self.UrunOzellikler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Üye" EntityType="Self.Üye" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Kampanya_UrunFiyat" Association="Self.FK_Kampanya_UrunFiyat">
             <End Role="UrunFiyat" EntitySet="UrunFiyat" />
             <End Role="Kampanya" EntitySet="Kampanya" />
           </AssociationSet>
-          <AssociationSet Name="FK_OzellikDetay_UrunDetaylari" Association="Self.FK_OzellikDetay_UrunDetaylari">
+          <AssociationSet Name="FK_Ozellik_UrunDetaylari" Association="Self.FK_Ozellik_UrunDetaylari">
             <End Role="UrunDetaylari" EntitySet="UrunDetaylari" />
-            <End Role="OzellikDetay" EntitySet="OzellikDetay" />
+            <End Role="Ozellik" EntitySet="Ozellik" />
           </AssociationSet>
-          <AssociationSet Name="FK_OzellikDetay_UrunOzellikler" Association="Self.FK_OzellikDetay_UrunOzellikler">
-            <End Role="UrunOzellikler" EntitySet="UrunOzellikler" />
-            <End Role="OzellikDetay" EntitySet="OzellikDetay" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resimler_Urunler" Association="Self.FK_Resimler_Urunler">
-            <End Role="Urunler" EntitySet="Urunler" />
+          <AssociationSet Name="FK_Resimler_UrunDetaylari" Association="Self.FK_Resimler_UrunDetaylari">
+            <End Role="UrunDetaylari" EntitySet="UrunDetaylari" />
             <End Role="Resimler" EntitySet="Resimler" />
           </AssociationSet>
           <AssociationSet Name="FK_Sepet_UrunDetaylari" Association="Self.FK_Sepet_UrunDetaylari">
@@ -503,7 +476,8 @@
             <End Role="Üye" EntitySet="Üye" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -543,7 +517,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="KategoriAdi" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Urunler" Relationship="Self.FK_Urunler_Kategori" FromRole="Katagori" ToRole="Urunler" />
+          <NavigationProperty Name="Urunler" Relationship="Self.FK_Urunler_Katagori" FromRole="Katagori" ToRole="Urunler" />
         </EntityType>
         <EntityType Name="Markalar">
           <Key>
@@ -563,16 +537,15 @@
           <Property Name="OdemeTipi" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Siparisler" Relationship="Self.FK_Siparisler_OdemeSecenekleri" FromRole="OdemeSecenekleri" ToRole="Siparisler" />
         </EntityType>
-        <EntityType Name="OzellikDetay">
+        <EntityType Name="Ozellik">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ozellikId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UrunId" Type="Int32" Nullable="false" />
-          <Property Name="UrunOzellikId" Type="Int32" Nullable="false" />
-          <Property Name="ÖzellikDetay" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="UrunDetaylari" Relationship="Self.FK_OzellikDetay_UrunDetaylari" FromRole="OzellikDetay" ToRole="UrunDetaylari" />
-          <NavigationProperty Name="UrunOzellikler" Relationship="Self.FK_OzellikDetay_UrunOzellikler" FromRole="OzellikDetay" ToRole="UrunOzellikler" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="OzellikAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Özellik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ozellikId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="UrunDetaylari" Relationship="Self.FK_Ozellik_UrunDetaylari" FromRole="Ozellik" ToRole="UrunDetaylari" />
         </EntityType>
         <EntityType Name="Resimler">
           <Key>
@@ -581,10 +554,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UrunId" Type="Int32" Nullable="false" />
           <Property Name="Resim" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="KatalogResmi" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="SlideResmi" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="ResimYolu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Urunler" Relationship="Self.FK_Resimler_Urunler" FromRole="Resimler" ToRole="Urunler" />
+          <NavigationProperty Name="UrunDetaylari" Relationship="Self.FK_Resimler_UrunDetaylari" FromRole="Resimler" ToRole="UrunDetaylari" />
         </EntityType>
         <EntityType Name="Roller">
           <Key>
@@ -674,11 +644,12 @@
           <Property Name="stokSayisi" Type="Int32" />
           <Property Name="resim" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="model_cins" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="OzellikDetay" Relationship="Self.FK_OzellikDetay_UrunDetaylari" FromRole="UrunDetaylari" ToRole="OzellikDetay" />
+          <NavigationProperty Name="Ozellik" Relationship="Self.FK_Ozellik_UrunDetaylari" FromRole="UrunDetaylari" ToRole="Ozellik" />
+          <NavigationProperty Name="Resimler" Relationship="Self.FK_Resimler_UrunDetaylari" FromRole="UrunDetaylari" ToRole="Resimler" />
           <NavigationProperty Name="Sepet" Relationship="Self.FK_Sepet_UrunDetaylari" FromRole="UrunDetaylari" ToRole="Sepet" />
           <NavigationProperty Name="Siparisler" Relationship="Self.FK_Siparisler_UrunDetaylari" FromRole="UrunDetaylari" ToRole="Siparisler" />
           <NavigationProperty Name="Taksitler" Relationship="Self.FK_Taksitler_UrunDetaylari" FromRole="UrunDetaylari" ToRole="Taksitler" />
-          <NavigationProperty Name="Urunler" Relationship="Self.FK_UrunDetaylari_Urunler" FromRole="UrunDetaylari" ToRole="Urunler" />
+          <NavigationProperty Name="Urunler" Relationship="Self.FK_UrunDetaylari_Urunler1" FromRole="UrunDetaylari" ToRole="Urunler" />
           <NavigationProperty Name="UrunFiyat" Relationship="Self.FK_UrunFiyat_UrunDetaylari" FromRole="UrunDetaylari" ToRole="UrunFiyat" />
         </EntityType>
         <EntityType Name="UrunFiyat">
@@ -701,18 +672,9 @@
           <Property Name="KategoriId" Type="Int32" Nullable="false" />
           <Property Name="MarkaId" Type="Int32" Nullable="false" />
           <Property Name="Acıklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Katagori" Relationship="Self.FK_Urunler_Kategori" FromRole="Urunler" ToRole="Katagori" />
+          <NavigationProperty Name="Katagori" Relationship="Self.FK_Urunler_Katagori" FromRole="Urunler" ToRole="Katagori" />
           <NavigationProperty Name="Markalar" Relationship="Self.FK_Urunler_Markalar" FromRole="Urunler" ToRole="Markalar" />
-          <NavigationProperty Name="Resimler" Relationship="Self.FK_Resimler_Urunler" FromRole="Urunler" ToRole="Resimler" />
-          <NavigationProperty Name="UrunDetaylari" Relationship="Self.FK_UrunDetaylari_Urunler" FromRole="Urunler" ToRole="UrunDetaylari" />
-        </EntityType>
-        <EntityType Name="UrunOzellikler">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OzellikAdi" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="OzellikDetay" Relationship="Self.FK_OzellikDetay_UrunOzellikler" FromRole="UrunOzellikler" ToRole="OzellikDetay" />
+          <NavigationProperty Name="UrunDetaylari" Relationship="Self.FK_UrunDetaylari_Urunler1" FromRole="Urunler" ToRole="UrunDetaylari" />
         </EntityType>
         <EntityType Name="Üye">
           <Key>
@@ -767,7 +729,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Urunler_Kategori">
+        <Association Name="FK_Urunler_Katagori">
           <End Role="Katagori" Type="Self.Katagori" Multiplicity="1" />
           <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
           <ReferentialConstraint>
@@ -803,35 +765,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OzellikDetay_UrunDetaylari">
+        <Association Name="FK_Ozellik_UrunDetaylari">
           <End Role="UrunDetaylari" Type="Self.UrunDetaylari" Multiplicity="1" />
-          <End Role="OzellikDetay" Type="Self.OzellikDetay" Multiplicity="*" />
+          <End Role="Ozellik" Type="Self.Ozellik" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UrunDetaylari">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="OzellikDetay">
-              <PropertyRef Name="UrunId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OzellikDetay_UrunOzellikler">
-          <End Role="UrunOzellikler" Type="Self.UrunOzellikler" Multiplicity="1" />
-          <End Role="OzellikDetay" Type="Self.OzellikDetay" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UrunOzellikler">
+            <Dependent Role="Ozellik">
               <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OzellikDetay">
-              <PropertyRef Name="UrunOzellikId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Resimler_Urunler">
-          <End Role="Urunler" Type="Self.Urunler" Multiplicity="1" />
+        <Association Name="FK_Resimler_UrunDetaylari">
+          <End Role="UrunDetaylari" Type="Self.UrunDetaylari" Multiplicity="1" />
           <End Role="Resimler" Type="Self.Resimler" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Urunler">
+            <Principal Role="UrunDetaylari">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Resimler">
@@ -923,7 +873,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UrunDetaylari_Urunler">
+        <Association Name="FK_UrunDetaylari_Urunler1">
           <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
           <End Role="UrunDetaylari" Type="Self.UrunDetaylari" Multiplicity="*" />
           <ReferentialConstraint>
@@ -954,7 +904,7 @@
           <EntitySet Name="Katagori" EntityType="Self.Katagori" />
           <EntitySet Name="Markalar" EntityType="Self.Markalar" />
           <EntitySet Name="OdemeSecenekleri" EntityType="Self.OdemeSecenekleri" />
-          <EntitySet Name="OzellikDetay" EntityType="Self.OzellikDetay" />
+          <EntitySet Name="Ozellik" EntityType="Self.Ozellik" />
           <EntitySet Name="Resimler" EntityType="Self.Resimler" />
           <EntitySet Name="Roller" EntityType="Self.Roller" />
           <EntitySet Name="Sepet" EntityType="Self.Sepet" />
@@ -966,7 +916,6 @@
           <EntitySet Name="UrunDetaylari" EntityType="Self.UrunDetaylari" />
           <EntitySet Name="UrunFiyat" EntityType="Self.UrunFiyat" />
           <EntitySet Name="Urunler" EntityType="Self.Urunler" />
-          <EntitySet Name="UrunOzellikler" EntityType="Self.UrunOzellikler" />
           <EntitySet Name="Üye" EntityType="Self.Üye" />
           <AssociationSet Name="FK_Taksitler_Banka" Association="Self.FK_Taksitler_Banka">
             <End Role="Banka" EntitySet="Banka" />
@@ -980,7 +929,7 @@
             <End Role="Kargo" EntitySet="Kargo" />
             <End Role="Siparisler" EntitySet="Siparisler" />
           </AssociationSet>
-          <AssociationSet Name="FK_Urunler_Kategori" Association="Self.FK_Urunler_Kategori">
+          <AssociationSet Name="FK_Urunler_Katagori" Association="Self.FK_Urunler_Katagori">
             <End Role="Katagori" EntitySet="Katagori" />
             <End Role="Urunler" EntitySet="Urunler" />
           </AssociationSet>
@@ -992,16 +941,12 @@
             <End Role="OdemeSecenekleri" EntitySet="OdemeSecenekleri" />
             <End Role="Siparisler" EntitySet="Siparisler" />
           </AssociationSet>
-          <AssociationSet Name="FK_OzellikDetay_UrunDetaylari" Association="Self.FK_OzellikDetay_UrunDetaylari">
+          <AssociationSet Name="FK_Ozellik_UrunDetaylari" Association="Self.FK_Ozellik_UrunDetaylari">
             <End Role="UrunDetaylari" EntitySet="UrunDetaylari" />
-            <End Role="OzellikDetay" EntitySet="OzellikDetay" />
+            <End Role="Ozellik" EntitySet="Ozellik" />
           </AssociationSet>
-          <AssociationSet Name="FK_OzellikDetay_UrunOzellikler" Association="Self.FK_OzellikDetay_UrunOzellikler">
-            <End Role="UrunOzellikler" EntitySet="UrunOzellikler" />
-            <End Role="OzellikDetay" EntitySet="OzellikDetay" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Resimler_Urunler" Association="Self.FK_Resimler_Urunler">
-            <End Role="Urunler" EntitySet="Urunler" />
+          <AssociationSet Name="FK_Resimler_UrunDetaylari" Association="Self.FK_Resimler_UrunDetaylari">
+            <End Role="UrunDetaylari" EntitySet="UrunDetaylari" />
             <End Role="Resimler" EntitySet="Resimler" />
           </AssociationSet>
           <AssociationSet Name="FK_Üye_Roller" Association="Self.FK_Üye_Roller">
@@ -1032,7 +977,7 @@
             <End Role="UrunDetaylari" EntitySet="UrunDetaylari" />
             <End Role="Taksitler" EntitySet="Taksitler" />
           </AssociationSet>
-          <AssociationSet Name="FK_UrunDetaylari_Urunler" Association="Self.FK_UrunDetaylari_Urunler">
+          <AssociationSet Name="FK_UrunDetaylari_Urunler1" Association="Self.FK_UrunDetaylari_Urunler1">
             <End Role="Urunler" EntitySet="Urunler" />
             <End Role="UrunDetaylari" EntitySet="UrunDetaylari" />
           </AssociationSet>
@@ -1103,13 +1048,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OzellikDetay">
-            <EntityTypeMapping TypeName="Model.OzellikDetay">
-              <MappingFragment StoreEntitySet="OzellikDetay">
+          <EntitySetMapping Name="Ozellik">
+            <EntityTypeMapping TypeName="Model.Ozellik">
+              <MappingFragment StoreEntitySet="Ozellik">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UrunId" ColumnName="UrunId" />
-                <ScalarProperty Name="UrunOzellikId" ColumnName="UrunOzellikId" />
-                <ScalarProperty Name="ÖzellikDetay" ColumnName="ÖzellikDetay" />
+                <ScalarProperty Name="OzellikAdi" ColumnName="OzellikAdi" />
+                <ScalarProperty Name="Özellik" ColumnName="Özellik" />
+                <ScalarProperty Name="ozellikId" ColumnName="ozellikId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1119,9 +1064,6 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UrunId" ColumnName="UrunId" />
                 <ScalarProperty Name="Resim" ColumnName="Resim" />
-                <ScalarProperty Name="KatalogResmi" ColumnName="KatalogResmi" />
-                <ScalarProperty Name="SlideResmi" ColumnName="SlideResmi" />
-                <ScalarProperty Name="ResimYolu" ColumnName="ResimYolu" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1227,14 +1169,6 @@
                 <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
                 <ScalarProperty Name="MarkaId" ColumnName="MarkaId" />
                 <ScalarProperty Name="Acıklama" ColumnName="Acıklama" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UrunOzellikler">
-            <EntityTypeMapping TypeName="Model.UrunOzellikler">
-              <MappingFragment StoreEntitySet="UrunOzellikler">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="OzellikAdi" ColumnName="OzellikAdi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

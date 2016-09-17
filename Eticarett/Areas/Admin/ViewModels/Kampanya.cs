@@ -14,5 +14,6 @@ namespace Eticarett.Areas.Admin.ViewModels
         public DateTime BaslangicTarihi { get; set; }
         public DateTime BitisTarihi { get; set; }
         public string Aciklama { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -43,6 +43,20 @@ namespace Eticarett.Areas.Admin.Controllers
             context.SaveChanges();
             return RedirectToAction("list");
         }
+        public ActionResult Edit(int id)
+        {
+            return View(context.UrunFiyat.Find(id));
+        }
+        [HttpPost]
+        public ActionResult Edit(UrunFiyat fiyat)
+        {
+            UrunFiyat _fiyat = context.UrunFiyat.Find(fiyat.Id);
+            _fiyat.KarOranı = fiyat.KarOranı;
+            _fiyat.KdvOrani = fiyat.KdvOrani;
+            _fiyat.AlisFiyati = fiyat.AlisFiyati;
+            context.SaveChanges();
+            return RedirectToAction("list");
+        }
     }
-   
+
 }

@@ -28,7 +28,7 @@ namespace Eticarett.Controllers
                 _marka.imagePath = new ImageLoad(marka.MarkaLogo, marka.Id, 30, 50).ImagePath;
 
             }
-            var totalPostCount = context.Kampanya.Where(x=>x.BitisTarihi>DateTime.Now).Count();
+            var totalPostCount = context.Kampanya.Where(x => x.BitisTarihi > DateTime.Now).Count();
             PageDataForData KampanyalıUrun = new PageDataForData(page, postsPerPage, true);
             return View(new KampanyalıUrunler()
             {
@@ -187,7 +187,7 @@ namespace Eticarett.Controllers
                 SepetToplam.Indirim += sepet.Indirim * sepet.Adet;
                 SepetToplam.Sepet += sepet.Sepett * sepet.Adet;
             }
-          
+
             return View(SepetToplam);
         }
         string Fiyat;
@@ -209,7 +209,7 @@ namespace Eticarett.Controllers
             }
 
             UrunFiyat urun = context.UrunFiyat.Where(x => x.UrunId == id).SingleOrDefault();
-            if (urun.Kampanya == null)
+            if (urun.Kampanya.Count == 0)
             {
                 Prince prince = new Prince(urun.AlisFiyati, urun.KarOranı, urun.KdvOrani);
                 Fiyat = prince.Fiyat;
@@ -226,17 +226,52 @@ namespace Eticarett.Controllers
             {
                 Marka = _markalist,
                 Kategori = context.Katagori.ToList(),
-                detay = context.OzellikDetay.Where(x => x.UrunId == id).SingleOrDefault(),
-                Fiyat = Fiyat
-
+                detay = context.UrunDetaylari.Where(x => x.Id == id).SingleOrDefault().Ozellik.ToList(),
+                Fiyat = Fiyat,
+                //resimler = new ImageLoad(context.Resimler.Where(x => x.UrunId == id).ToList(), id, 200, 300).ImagePathList,
+                urun=new PageDataForData(id).Urunler.SingleOrDefault()
             });
         }
-        public ActionResult CompareListAdd(int id)
+        public ActionResult CompareListAdd(string id, string Urll)
         {
-          
+            bool a = false;
+            if (Session["Compare"] == null)
+            {
+                Session.Add("Compare", id);
+            }
+            else
+            {
+
+                string Compare = Session["Compare"].ToString();
+                string[] metin = Compare.Split(',');
+                for (int i = 0; i < metin.Length; i++)
+                {
+                    if (metin[i] == id)
+                    {
+                        a = true;
+                        break;
+                    }
+                }
+                if (a == false)
+                {
+                    id.Insert(0, ",");
+                    Compare.Insert(Compare.Length, id);
+                    Session.Add("Compare", Compare);
+                }
+            }
+            return Redirect(Urll);
+        }
+        public ActionResult Compare(bool Remove = false, int id = 0)
+        {
+            string Compare = Session["Compare"].ToString();
+            string[] metin = Compare.Split(',');
+            for (int i = 0; i < metin.Length; i++)
+            {
+                //context.UrunDetaylari.Where(x=>x.urunId==id).SingleOrDefault().OzellikDetay.SingleOrDefault().
+            }
+
             return View();
         }
-
 
     }
 }

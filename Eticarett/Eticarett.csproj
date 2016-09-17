@@ -135,6 +135,7 @@
     <Compile Include="Areas\Admin\Controllers\KampanyaController.cs" />
     <Compile Include="Areas\Admin\Controllers\KategoriController.cs" />
     <Compile Include="Areas\Admin\Controllers\MarkaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OzellikController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolController.cs" />
     <Compile Include="Areas\Admin\Controllers\UrunController.cs" />
     <Compile Include="Areas\Admin\Controllers\UrunDetayController.cs" />
@@ -185,7 +186,7 @@
     <Compile Include="Models\OdemeSecenekleri.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OzellikDetay.cs">
+    <Compile Include="Models\Ozellik.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Resimler.cs">
@@ -219,9 +220,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Urunler.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UrunOzellikler.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Üye.cs">
@@ -381,13 +379,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\Urun\List.cshtml" />
     <Content Include="Areas\Admin\Views\Urun\New.cshtml" />
     <Content Include="Areas\Admin\Views\UrunDetay\List.cshtml" />
@@ -401,6 +392,21 @@
     <Content Include="Areas\Admin\Views\Marka\New.cshtml" />
     <Content Include="Areas\Admin\Views\Rol\List.cshtml" />
     <Content Include="Areas\Admin\Views\Rol\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Ozellik\New.cshtml" />
+    <EntityDeploy Include="Models\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\Kampanya\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Kategori\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Marka\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UrunDetay\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UrunDetay\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Ozellik\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\UrunFiyat\Edit.cshtml" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Home\List.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />

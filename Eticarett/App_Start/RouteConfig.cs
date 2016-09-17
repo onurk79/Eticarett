@@ -23,7 +23,7 @@ namespace Eticarett
             routes.MapRoute("Account", "Account", new { controller = "Account", action = "Account" });
             routes.MapRoute("ShoppingCardAdd", "ShoppingCardAdd", new { controller = "Home", action = "ShoppingCardAdd" });
             routes.MapRoute("ShoppingCard", "ShoppingCard", new { controller = "Home", action = "ShoppingCard" });
-
+            routes.MapRoute("CompareListAdd", "CompareListAdd", new { controller = "Home", action = "CompareListAdd" });
         }
     }
 }

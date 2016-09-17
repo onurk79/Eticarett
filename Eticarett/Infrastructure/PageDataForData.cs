@@ -23,7 +23,7 @@ namespace Eticarett.Infrastructure
                 {
                     ViewModels.Urun urrun = new ViewModels.Urun();
                     Prince Fiyat = new Prince(_urun.UrunFiyat.AlisFiyati, _urun.UrunFiyat.KarOranı, _urun.UrunFiyat.KdvOrani, _urun.IndrimOranı);
-                    urrun.Fiyat =  Fiyat.Fiyat;
+                    urrun.Fiyat = Fiyat.Fiyat;
                     ImageLoad Image = new ImageLoad(_urun.UrunFiyat.UrunDetaylari.resim, _urun.UrunFiyat.UrunId, 484, 441);
                     urrun.ResimYolu = Image.ImagePath;
                     urrun.UrunId = _urun.UrunFiyat.UrunId;
@@ -49,11 +49,12 @@ namespace Eticarett.Infrastructure
                         {
                             ViewModels.Urun urrun = new ViewModels.Urun();
                             Prince Fiyat = new Prince(i.AlisFiyati, i.KarOranı, i.KdvOrani);
-                            urrun.Fiyat =  Fiyat.Fiyat;
+                            urrun.Fiyat = Fiyat.Fiyat;
                             ImageLoad Image = new ImageLoad(i.UrunDetaylari.resim, i.UrunId, 484, 441);
                             urrun.ResimYolu = Image.ImagePath;
                             urrun.UrunId = i.UrunId;
                             urrun.UrunAdi = i.UrunDetaylari.model_cins;
+                            urrun.id = i.Id;
                             Urunler.Add(urrun);
                         }
                         else
@@ -80,7 +81,7 @@ namespace Eticarett.Infrastructure
         {
             if (Markamı)
             {
-                var currentPosts = context.UrunDetaylari.Where(x=>x.Urunler.Markalar.Id==id).OrderByDescending(p => p.urunId)
+                var currentPosts = context.UrunDetaylari.Where(x => x.Urunler.Markalar.Id == id).OrderByDescending(p => p.urunId)
                               .Skip((page - 1) * postsPerPage)
                               .Take(postsPerPage).ToList();
                 foreach (var _urun in currentPosts)
@@ -104,7 +105,7 @@ namespace Eticarett.Infrastructure
                             foreach (var b in i.Kampanya)
                             {
                                 Prince Fiyat = new Prince(i.AlisFiyati, i.KarOranı, i.KdvOrani, b.IndrimOranı);
-                                urrun.Fiyat =Fiyat.Fiyat;
+                                urrun.Fiyat = Fiyat.Fiyat;
                             }
                             ImageLoad Image = new ImageLoad(i.UrunDetaylari.resim, i.UrunId, 484, 441);
                             urrun.ResimYolu = Image.ImagePath;
@@ -115,9 +116,9 @@ namespace Eticarett.Infrastructure
                     }
                 }
             }
-           else
+            else
             {
-                var currentPosts = context.UrunDetaylari.Where(x=>x.Urunler.Katagori.Id==id).OrderByDescending(p => p.urunId)
+                var currentPosts = context.UrunDetaylari.Where(x => x.Urunler.Katagori.Id == id).OrderByDescending(p => p.urunId)
                                  .Skip((page - 1) * postsPerPage)
                                  .Take(postsPerPage).ToList();
                 foreach (var _urun in currentPosts)
@@ -128,7 +129,7 @@ namespace Eticarett.Infrastructure
                         {
                             ViewModels.Urun urrun = new ViewModels.Urun();
                             Prince Fiyat = new Prince(i.AlisFiyati, i.KarOranı, i.KdvOrani);
-                            urrun.Fiyat =Fiyat.Fiyat;
+                            urrun.Fiyat = Fiyat.Fiyat;
                             ImageLoad Image = new ImageLoad(i.UrunDetaylari.resim, i.UrunId, 484, 441);
                             urrun.ResimYolu = Image.ImagePath;
                             urrun.UrunId = i.UrunId;
@@ -141,7 +142,7 @@ namespace Eticarett.Infrastructure
                             foreach (var b in i.Kampanya)
                             {
                                 Prince Fiyat = new Prince(i.AlisFiyati, i.KarOranı, i.KdvOrani, b.IndrimOranı);
-                                urrun.Fiyat =Fiyat.Fiyat;
+                                urrun.Fiyat = Fiyat.Fiyat;
                             }
                             ImageLoad Image = new ImageLoad(i.UrunDetaylari.resim, i.UrunId, 484, 441);
                             urrun.ResimYolu = Image.ImagePath;
@@ -152,7 +153,45 @@ namespace Eticarett.Infrastructure
                     }
                 }
             }
-           
+
         }
+        public PageDataForData(int id)
+        {
+            var currentPosts = context.UrunDetaylari.Where(x => x.Id == id).FirstOrDefault();
+            foreach (var i in currentPosts.UrunFiyat)
+            {
+                if (i.Kampanya.Count == 0)
+                {
+                    ViewModels.Urun urrun = new ViewModels.Urun();
+                    Prince Fiyat = new Prince(i.AlisFiyati, i.KarOranı, i.KdvOrani);
+                    urrun.Fiyat = Fiyat.Fiyat;
+                    ImageLoad Image = new ImageLoad(i.UrunDetaylari.resim, i.UrunId, 484, 441);
+                    urrun.ResimYolu = Image.ImagePath;
+                    urrun.UrunId = i.UrunId;
+                    urrun.UrunAdi = i.UrunDetaylari.model_cins;
+                    urrun.id = i.Id;
+                    Urunler.Add(urrun);
+                }
+                else
+                {
+                    ViewModels.Urun urrun = new ViewModels.Urun();
+                    foreach (var b in i.Kampanya)
+                    {
+                        Prince Fiyat = new Prince(i.AlisFiyati, i.KarOranı, i.KdvOrani, b.IndrimOranı);
+                        urrun.Fiyat = Fiyat.Fiyat;
+                    }
+                    ImageLoad Image = new ImageLoad(i.UrunDetaylari.resim, i.UrunId, 484, 441);
+                    urrun.ResimYolu = Image.ImagePath;
+                    urrun.UrunId = i.UrunId;
+                    urrun.UrunAdi = i.UrunDetaylari.model_cins;
+                    urrun.id = i.Id;
+                    Urunler.Add(urrun);
+                }
+            }
+
+
+        }
+
+
     }
 }

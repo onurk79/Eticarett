@@ -17,7 +17,8 @@ namespace Eticarett.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UrunDetaylari()
         {
-            this.OzellikDetay = new HashSet<OzellikDetay>();
+            this.Ozellik = new HashSet<Ozellik>();
+            this.Resimler = new HashSet<Resimler>();
             this.Sepet = new HashSet<Sepet>();
             this.Siparisler = new HashSet<Siparisler>();
             this.Taksitler = new HashSet<Taksitler>();
@@ -32,7 +33,9 @@ namespace Eticarett.Models
         public string model_cins { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OzellikDetay> OzellikDetay { get; set; }
+        public virtual ICollection<Ozellik> Ozellik { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resimler> Resimler { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sepet> Sepet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

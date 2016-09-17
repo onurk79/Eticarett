@@ -17,10 +17,7 @@ namespace Eticarett.Models
         public int Id { get; set; }
         public int UrunId { get; set; }
         public byte[] Resim { get; set; }
-        public byte[] KatalogResmi { get; set; }
-        public byte[] SlideResmi { get; set; }
-        public string ResimYolu { get; set; }
     
-        public virtual Urunler Urunler { get; set; }
+        public virtual UrunDetaylari UrunDetaylari { get; set; }
     }
 }

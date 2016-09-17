@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Eticarett.Models.Ozellik>
+
+
+
+<h2>Özellik</h2>
+
+<p>
+   <a href="@Url.Action( "New","Ozellik", new { id = ViewBag.id })">Özellik Ekle </a> 
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OzellikAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Özellik)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OzellikAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Özellik)
+        </td>
+        
+        <td>
+            <a href="@Url.Action( "Edit","Ozellik", new { id=item.ozellikId })">Düzenle </a> |
+            <a href="@Url.Action( "Delete","Ozellik", new { id=item.ozellikId })">Sil </a> 
+            
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    <a href="@Url.Action( "List","UrunDetay")"> Geri</a>
+</div>

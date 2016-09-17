@@ -38,5 +38,17 @@ namespace Eticarett.Areas.Admin.Controllers
             }
             return RedirectToAction("List");
         }
+        public ActionResult Edit(int id)
+        {
+            return View(context.Katagori.Where(x=>x.Id==id).SingleOrDefault());
+        }
+        [HttpPost]
+        public ActionResult Edit(Katagori kategori)
+        {
+         Katagori _kategori=   context.Katagori.Where(x => x.Id == kategori.Id).SingleOrDefault();
+            _kategori.KategoriAdi = kategori.KategoriAdi;
+            context.SaveChanges();
+            return RedirectToAction("List");
+        }
     }
 }

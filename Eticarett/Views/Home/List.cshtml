@@ -148,10 +148,13 @@
                                             <div class="product-image-wrapper">
                                                 <div class="single-products">
                                                     <div class="productinfo text-center">
-                                                        <img src="@i.ResimYolu" alt="" />
-                                                        <h2>@i.Fiyat ₺</h2>
-                                                        <p>@i.UrunAdi</p>
-                                                        <a href="@Url.Action("ShoppingCardAdd","Home",new { id = i.UrunId,urll= HttpContext.Current.Request.Url.PathAndQuery.ToString() })" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i>Sepete Ekle</a>                                                    </div>
+                                                        <a href="@Url.Action("Details","Home",new {id=i.UrunId })">
+                                                            <img src="@i.ResimYolu" alt="" />
+                                                            <h2>@i.Fiyat ₺</h2>
+                                                            <p>@i.UrunAdi</p>
+                                                        </a>
+                                                        <a href="@Url.Action("ShoppingCardAdd","Home",new { id = i.UrunId,urll= HttpContext.Current.Request.Url.PathAndQuery.ToString() })" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i>Sepete Ekle</a>
+                                                    </div>
 
                                                 </div>
                                             </div>

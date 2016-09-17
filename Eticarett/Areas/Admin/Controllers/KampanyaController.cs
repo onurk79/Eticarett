@@ -44,7 +44,7 @@ namespace Eticarett.Areas.Admin.Controllers
             ViewData["KategoriId"] = kategori;
             ViewData["MarkaId"] = marka;
             ViewData["UrunId"] = urun;
-            
+
             return View();
 
         }
@@ -76,6 +76,35 @@ namespace Eticarett.Areas.Admin.Controllers
             context.Kampanya.Remove(Kampanya);
             context.SaveChanges();
             return RedirectToAction("list");
+        }
+        public ActionResult Edit(int id)
+        {
+            Kampanya kampanya = context.Kampanya.Where(x => x.Id == id).SingleOrDefault();
+            return View(new ViewModels.Kampanya()
+            {
+                Aciklama = kampanya.Acıklama,
+                Id = kampanya.Id,
+                BaslangicTarihi = kampanya.BaslangıcTarihi,
+                BitisTarihi = kampanya.BitisTarihi,
+                IndirimOranı = Convert.ToInt32(kampanya.IndrimOranı),
+                KategoriId = kampanya.UrunFiyat.UrunDetaylari.Urunler.KategoriId,
+                UrunId = kampanya.UrunId,
+                MarkaId = kampanya.UrunFiyat.UrunDetaylari.Urunler.MarkaId
+
+            });
+        }
+        [HttpPost]
+        public ActionResult Edit(ViewModels.Kampanya Kampanya)
+        {
+            Kampanya Kampanyadb = context.Kampanya.Where(x=>x.Id==Kampanya.Id).SingleOrDefault();
+                   
+            Kampanyadb.UrunId = Kampanya.UrunId;
+            Kampanyadb.IndrimOranı = Kampanya.IndirimOranı;
+            Kampanyadb.Acıklama = Kampanya.Aciklama;
+            Kampanyadb.BaslangıcTarihi = Kampanya.BaslangicTarihi;
+            Kampanyadb.BitisTarihi = Kampanya.BitisTarihi;
+            context.SaveChanges();
+            return RedirectToAction("List");
         }
     }
 }
